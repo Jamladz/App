@@ -154,27 +154,47 @@
             color: var(--dark);
         }
         
-        /* Profile Dropdown */
-        .profile-dropdown {
+        /* نافذة الملف الشخصي المنبثقة */
+        .profile-popup {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.9);
             background: var(--light-dark);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             width: 90%;
             max-width: 400px;
-            padding: 20px;
-            z-index: 1001;
-            display: none;
+            padding: 25px;
+            z-index: 1002;
             opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
         }
         
-        .profile-dropdown.active {
-            display: block;
+        .profile-popup.active {
             opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* طبقة التغطية */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
         .profile-header {
@@ -927,22 +947,6 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-        
-        /* Overlay for modals */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            display: none;
-        }
-        
-        .modal-overlay.active {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -968,45 +972,47 @@
             </div>
             <div class="user-profile" id="user-profile">
                 <i class="fas fa-user"></i>
-                <div class="profile-dropdown" id="profile-dropdown">
-                    <div class="profile-header">
-                        <div class="profile-avatar" id="user-avatar">?</div>
-                        <div class="profile-info">
-                            <h4 id="username">زائر</h4>
-                            <p id="user-telegram">غير متصل ب Telegram</p>
-                        </div>
-                    </div>
-                    
-                    <div class="profile-stats">
-                        <div class="stat-item">
-                            <div class="stat-value" id="watch-hours">0</div>
-                            <div class="stat-label">ساعات مشاهدة</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="saved-count">0</div>
-                            <div class="stat-label">مسلسلات محفوظة</div>
-                        </div>
-                    </div>
-                    
-                    <div class="referral-section">
-                        <h5>دعوة الأصدقاء واحصل على مكافآت!</h5>
-                        <div class="referral-code" id="referral-code">SHASHA-${Math.floor(1000 + Math.random() * 9000)}</div>
-                        <button class="copy-referral" id="copy-referral">
-                            <i class="fas fa-copy"></i> نسخ كود الإحالة
-                        </button>
-                    </div>
-                    
-                    <h4 class="saved-series-title">مسلسلاتك المحفوظة</h4>
-                    <div class="saved-series" id="saved-series">
-                        <!-- سيتم ملؤها بالمسلسلات المحفوظة -->
-                    </div>
-                </div>
             </div>
         </div>
     </header>
     
-    <!-- Modal Overlay -->
-    <div class="modal-overlay" id="modal-overlay"></div>
+    <!-- نافذة الملف الشخصي المنبثقة -->
+    <div class="profile-popup" id="profile-popup">
+        <div class="profile-header">
+            <div class="profile-avatar" id="user-avatar">?</div>
+            <div class="profile-info">
+                <h4 id="username">زائر</h4>
+                <p id="user-telegram">غير متصل ب Telegram</p>
+            </div>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="watch-hours">0</div>
+                <div class="stat-label">ساعات مشاهدة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="saved-count">0</div>
+                <div class="stat-label">مسلسلات محفوظة</div>
+            </div>
+        </div>
+        
+        <div class="referral-section">
+            <h5>دعوة الأصدقاء واحصل على مكافآت!</h5>
+            <div class="referral-code" id="referral-code">SHASHA-${Math.floor(1000 + Math.random() * 9000)}</div>
+            <button class="copy-referral" id="copy-referral">
+                <i class="fas fa-copy"></i> نسخ كود الإحالة
+            </button>
+        </div>
+        
+        <h4 class="saved-series-title">مسلسلاتك المحفوظة</h4>
+        <div class="saved-series" id="saved-series">
+            <!-- سيتم ملؤها بالمسلسلات المحفوظة -->
+        </div>
+    </div>
+    
+    <!-- طبقة التغطية للنافذة المنبثقة -->
+    <div class="popup-overlay" id="popup-overlay"></div>
     
     <!-- Hero Section -->
     <section class="hero fade-in">
@@ -1205,14 +1211,14 @@
         </div>
         
         <div class="copyright">
-            <p>&copy; 2025 Shasha TV. جميع الحقوق محفوظة.</p>
+            <p>© 2025 Shasha TV. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
     
     <!-- Video Player Modal -->
     <div class="video-modal" id="video-modal">
         <div class="video-modal-content">
-            <span class="close-video-modal" id="close-video-modal">&times;</span>
+            <span class="close-video-modal" id="close-video-modal">×</span>
             <div class="video-container">
                 <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
             </div>
@@ -1280,8 +1286,8 @@
             // تفعيل أزرار المفضلة
             setupFavorites();
             
-            // تفعيل القائمة المنسدلة للمستخدم
-            setupProfileDropdown();
+            // تفعيل النافذة المنبثقة للملف الشخصي
+            setupProfilePopup();
             
             // تفعيل مشغل الفيديو
             setupVideoPlayer();
@@ -1377,24 +1383,29 @@
             });
         }
         
-        // إعداد القائمة المنسدلة للمستخدم
-        function setupProfileDropdown() {
+        // إعداد النافذة المنبثقة للملف الشخصي
+        function setupProfilePopup() {
             const profileBtn = document.getElementById('user-profile');
-            const dropdown = document.getElementById('profile-dropdown');
-            const overlay = document.getElementById('modal-overlay');
+            const popup = document.getElementById('profile-popup');
+            const overlay = document.getElementById('popup-overlay');
             
             profileBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                dropdown.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = dropdown.classList.contains('active') ? 'hidden' : 'auto';
+                popup.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
             
-            // إغلاق القائمة عند النقر خارجها
+            // إغلاق النافذة عند النقر على overlay
             overlay.addEventListener('click', function() {
-                dropdown.classList.remove('active');
+                popup.classList.remove('active');
                 overlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
+            });
+            
+            // منع إغلاق النافذة عند النقر عليها
+            popup.addEventListener('click', function(e) {
+                e.stopPropagation();
             });
         }
         
@@ -1500,7 +1511,7 @@
                 // تصفية المسلسلات بناءً على مصطلح البحث
                 const filteredSeries = sampleSeries.filter(series => 
                     series.title.toLowerCase().includes(searchTerm)
-                    .slice(0, 5); // عرض أول 5 نتائج فقط
+                ).slice(0, 5); // عرض أول 5 نتائج فقط
                 
                 if (filteredSeries.length === 0) {
                     searchResults.innerHTML = '<div class="search-result-item" style="justify-content: center; color: rgba(255,255,255,0.7);">لا توجد نتائج</div>';
@@ -1530,7 +1541,7 @@
             
             // إغلاق نتائج البحث عند النقر خارجها
             document.addEventListener('click', function(e) {
-                if (!searchInput.contains(e.target) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
                     searchResults.classList.remove('active');
                 }
             });
