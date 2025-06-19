@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إيستا TV - مسلسلات تركية HD</title>
+    <title>Shasha TV - مسلسلات تركية HD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -143,6 +143,7 @@
             justify-content: center;
             cursor: pointer;
             transition: transform 0.3s ease;
+            position: relative;
         }
         
         .user-profile:hover {
@@ -151,6 +152,223 @@
         
         .user-profile i {
             color: var(--dark);
+        }
+        
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--light-dark);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            z-index: 1001;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-dropdown.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--dark);
+            font-weight: bold;
+        }
+        
+        .profile-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .profile-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-item .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .stat-item .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .referral-section {
+            background: rgba(255, 46, 99, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px dashed var(--primary);
+        }
+        
+        .referral-section h5 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .referral-code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .copy-referral {
+            background: var(--gradient);
+            color: var(--dark);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-referral:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+        }
+        
+        .saved-series {
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .saved-series::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .saved-series::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        .saved-series-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .saved-series-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .saved-series-item:last-child {
+            border-bottom: none;
+        }
+        
+        .saved-series-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .saved-series-item h6 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .saved-series-item p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Search Results Dropdown */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--light-dark);
+            border-radius: 0 0 10px 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-result-item {
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .search-result-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .search-result-info h5 {
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .search-result-info p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         /* Hero Section */
@@ -537,7 +755,7 @@
         }
         
         /* Video Player Modal */
-        .modal {
+        .video-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -552,18 +770,18 @@
             transition: opacity 0.3s ease;
         }
         
-        .modal.active {
+        .video-modal.active {
             display: flex;
             opacity: 1;
         }
         
-        .modal-content {
+        .video-modal-content {
             width: 80%;
             max-width: 1000px;
             position: relative;
         }
         
-        .close-modal {
+        .close-video-modal {
             position: absolute;
             top: -40px;
             right: 0;
@@ -573,7 +791,7 @@
             transition: all 0.3s ease;
         }
         
-        .close-modal:hover {
+        .close-video-modal:hover {
             color: var(--primary);
         }
         
@@ -631,7 +849,7 @@
                 height: 250px;
             }
             
-            .modal-content {
+            .video-modal-content {
                 width: 95%;
             }
         }
@@ -709,6 +927,22 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+        
+        /* Overlay for modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .modal-overlay.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -716,7 +950,7 @@
     <header class="header">
         <div class="logo">
             <i class="fas fa-tv"></i>
-            <h1>إيستا TV</h1>
+            <h1>Shasha TV</h1>
         </div>
         
         <nav class="nav-links">
@@ -729,19 +963,56 @@
         <div class="user-actions">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="ابحث عن مسلسل...">
+                <input type="text" id="search-input" placeholder="ابحث عن مسلسل...">
+                <div class="search-results" id="search-results"></div>
             </div>
-            <div class="user-profile">
+            <div class="user-profile" id="user-profile">
                 <i class="fas fa-user"></i>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="user-avatar">?</div>
+                        <div class="profile-info">
+                            <h4 id="username">زائر</h4>
+                            <p id="user-telegram">غير متصل ب Telegram</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="watch-hours">0</div>
+                            <div class="stat-label">ساعات مشاهدة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="saved-count">0</div>
+                            <div class="stat-label">مسلسلات محفوظة</div>
+                        </div>
+                    </div>
+                    
+                    <div class="referral-section">
+                        <h5>دعوة الأصدقاء واحصل على مكافآت!</h5>
+                        <div class="referral-code" id="referral-code">SHASHA-${Math.floor(1000 + Math.random() * 9000)}</div>
+                        <button class="copy-referral" id="copy-referral">
+                            <i class="fas fa-copy"></i> نسخ كود الإحالة
+                        </button>
+                    </div>
+                    
+                    <h4 class="saved-series-title">مسلسلاتك المحفوظة</h4>
+                    <div class="saved-series" id="saved-series">
+                        <!-- سيتم ملؤها بالمسلسلات المحفوظة -->
+                    </div>
+                </div>
             </div>
         </div>
     </header>
+    
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal-overlay"></div>
     
     <!-- Hero Section -->
     <section class="hero fade-in">
         <div class="hero-content">
             <h2>استمتع بأفضل المسلسلات التركية المترجمة</h2>
-            <p>جودة عالية HD، ترجمة احترافية، وتجربة مشاهدة فريدة. شاهد أحدث المسلسلات التركية الحصرية فقط على إيستا TV.</p>
+            <p>جودة عالية HD، ترجمة احترافية، وتجربة مشاهدة فريدة. شاهد أحدث المسلسلات التركية الحصرية فقط على Shasha TV.</p>
             <div class="hero-buttons">
                 <button class="btn btn-primary" id="watch-trailer">
                     <i class="fas fa-play"></i> شاهد العرض الدعائي
@@ -903,13 +1174,12 @@
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>إيستا TV</h4>
+                <h4>Shasha TV</h4>
                 <p>أفضل منصة لمشاهدة المسلسلات التركية المترجمة بجودة عالية وترجمة احترافية.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/ShashaTVBot" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                 </div>
             </div>
             
@@ -935,14 +1205,14 @@
         </div>
         
         <div class="copyright">
-            <p>&copy; 2025 إيستا TV. جميع الحقوق محفوظة.</p>
+            <p>&copy; 2025 Shasha TV. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
     
     <!-- Video Player Modal -->
-    <div class="modal" id="video-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-modal">&times;</span>
+    <div class="video-modal" id="video-modal">
+        <div class="video-modal-content">
+            <span class="close-video-modal" id="close-video-modal">&times;</span>
             <div class="video-container">
                 <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
             </div>
@@ -950,65 +1220,189 @@
     </div>
     
     <script>
-        // تفعيل أزرار المفضلة
+        // بيانات المستخدم (ستتم جلبها من Telegram أو localStorage)
+        let userData = {
+            name: "",
+            telegramUsername: "",
+            savedSeries: [],
+            watchHours: 0,
+            weeklyWatchHours: 0,
+            lastReset: null
+        };
+        
+        // مسلسلات المثال
+        const sampleSeries = [
+            { 
+                id: "persona", 
+                title: "شخص آخر", 
+                image: "https://i.suar.me/VzVL0/l", 
+                year: "2023", 
+                rating: "8.5",
+                views: (Math.floor(Math.random() * 10) + 5) + "M"
+            },
+            { 
+                id: "distant-city", 
+                title: "المدينة البعيدة", 
+                image: "https://i.suar.me/gPwQK/l", 
+                year: "2022", 
+                rating: "9.1",
+                views: (Math.floor(Math.random() * 15) + 8) + "M"
+            },
+            { 
+                id: "remember-love", 
+                title: "تذكر الحب", 
+                image: "https://i.suar.me/9lQG0/l", 
+                year: "2023", 
+                rating: "8.8",
+                views: (Math.floor(Math.random() * 12) + 6) + "M"
+            },
+            { 
+                id: "1001-nights", 
+                title: "ألف ليلة وليلة", 
+                image: "https://i.suar.me/MzB40/l", 
+                year: "2021", 
+                rating: "8.3",
+                views: (Math.floor(Math.random() * 20) + 10) + "M"
+            }
+        ];
+        
+        // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            const favButtons = document.querySelectorAll('.fav-btn');
-            favButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const icon = this.querySelector('i');
-                    if (icon.classList.contains('far')) {
-                        icon.classList.remove('far');
-                        icon.classList.add('fas');
-                        // إضافة إلى المفضلة
-                        const seriesCard = this.closest('.series-card');
-                        const seriesTitle = seriesCard.querySelector('.series-title').textContent;
-                        alert(`تمت إضافة "${seriesTitle}" إلى المفضلة`);
-                    } else {
-                        icon.classList.remove('fas');
-                        icon.classList.add('far');
-                        // إزالة من المفضلة
-                    }
-                });
+            // تحميل بيانات المستخدم من localStorage
+            loadUserData();
+            
+            // التحقق من إعادة تعيين الوقت الأسبوعي
+            checkWeeklyReset();
+            
+            // تحديث واجهة المستخدم
+            updateUserProfile();
+            
+            // تفعيل أزرار المفضلة
+            setupFavorites();
+            
+            // تفعيل القائمة المنسدلة للمستخدم
+            setupProfileDropdown();
+            
+            // تفعيل مشغل الفيديو
+            setupVideoPlayer();
+            
+            // محاكاة بيانات Telegram (في الواقع سيتم جلبها من البوت)
+            simulateTelegramData();
+            
+            // تفعيل نظام البحث
+            setupSearch();
+            
+            // تفعيل زر نسخ كود الإحالة
+            setupReferralButton();
+        });
+        
+        // تحميل بيانات المستخدم من localStorage
+        function loadUserData() {
+            const savedData = localStorage.getItem('shashaTvUserData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+            }
+        }
+        
+        // حفظ بيانات المستخدم في localStorage
+        function saveUserData() {
+            localStorage.setItem('shashaTvUserData', JSON.stringify(userData));
+        }
+        
+        // التحقق من إعادة تعيين الوقت الأسبوعي كل يوم اثنين
+        function checkWeeklyReset() {
+            const now = new Date();
+            const lastReset = userData.lastReset ? new Date(userData.lastReset) : null;
+            
+            // إذا لم يكن هناك تاريخ إعادة تعيين أو كان اليوم اثنين ومر أسبوع على آخر إعادة تعيين
+            if (!lastReset || (now.getDay() === 1 && (now - lastReset) >= 7 * 24 * 60 * 60 * 1000)) {
+                userData.weeklyWatchHours = 0;
+                userData.lastReset = now.toISOString();
+                saveUserData();
+            }
+        }
+        
+        // تحديث واجهة الملف الشخصي
+        function updateUserProfile() {
+            document.getElementById('username').textContent = userData.name || "زائر";
+            document.getElementById('user-telegram').textContent = 
+                userData.telegramUsername ? `@${userData.telegramUsername}` : "غير متصل ب Telegram";
+            
+            // تحديث الصورة الرمزية
+            const avatar = document.getElementById('user-avatar');
+            if (userData.name) {
+                avatar.textContent = userData.name.charAt(0).toUpperCase();
+            } else {
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+            }
+            
+            // تحديث ساعات المشاهدة
+            document.getElementById('watch-hours').textContent = userData.watchHours;
+            
+            // تحديث المسلسلات المحفوظة
+            updateSavedSeries();
+        }
+        
+        // تحديث قائمة المسلسلات المحفوظة
+        function updateSavedSeries() {
+            const savedSeriesContainer = document.getElementById('saved-series');
+            const savedCountElement = document.getElementById('saved-count');
+            
+            if (userData.savedSeries.length === 0) {
+                savedSeriesContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5);">لا توجد مسلسلات محفوظة</p>';
+                savedCountElement.textContent = "0";
+                return;
+            }
+            
+            savedSeriesContainer.innerHTML = '';
+            savedCountElement.textContent = userData.savedSeries.length;
+            
+            userData.savedSeries.forEach(seriesId => {
+                const series = sampleSeries.find(s => s.id === seriesId);
+                if (series) {
+                    const seriesItem = document.createElement('div');
+                    seriesItem.className = 'saved-series-item';
+                    seriesItem.innerHTML = `
+                        <img src="${series.image}" alt="${series.title}">
+                        <div>
+                            <h6>${series.title}</h6>
+                            <p>${series.year} • ${series.views} مشاهدة</p>
+                        </div>
+                    `;
+                    seriesItem.addEventListener('click', () => {
+                        window.location.href = `series.html?id=${series.id}`;
+                    });
+                    savedSeriesContainer.appendChild(seriesItem);
+                }
+            });
+        }
+        
+        // إعداد القائمة المنسدلة للمستخدم
+        function setupProfileDropdown() {
+            const profileBtn = document.getElementById('user-profile');
+            const dropdown = document.getElementById('profile-dropdown');
+            const overlay = document.getElementById('modal-overlay');
+            
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = dropdown.classList.contains('active') ? 'hidden' : 'auto';
             });
             
-            // تفعيل أزرار المشاهدة
-            const watchButtons = document.querySelectorAll('.watch-btn');
-            watchButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const seriesId = this.getAttribute('data-series');
-                    // يمكنك تغيير هذا الرابط حسب احتياجاتك
-                    window.location.href = `watch.html?series=${seriesId}&episode=1`;
-                });
+            // إغلاق القائمة عند النقر خارجها
+            overlay.addEventListener('click', function() {
+                dropdown.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
-            
-            // تفعيل بطاقات المسلسلات
-            const seriesCards = document.querySelectorAll('.series-card');
-            seriesCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const seriesTitle = this.querySelector('.series-title').textContent;
-                    // يمكنك تغيير هذا الرابط حسب احتياجاتك
-                    window.location.href = `series.html?title=${encodeURIComponent(seriesTitle)}`;
-                });
-            });
-            
-            // تفعيل الفئات
-            const categories = document.querySelectorAll('.category');
-            categories.forEach(category => {
-                category.addEventListener('click', function() {
-                    categories.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                    const categoryName = this.textContent.trim();
-                    // تصفية المسلسلات حسب الفئة
-                    alert(`تم اختيار فئة: ${categoryName}`);
-                });
-            });
-            
-            // تفعيل زر العرض الدعائي
+        }
+        
+        // إعداد مشغل الفيديو
+        function setupVideoPlayer() {
             const watchTrailerBtn = document.getElementById('watch-trailer');
             const videoModal = document.getElementById('video-modal');
-            const closeModal = document.getElementById('close-modal');
+            const closeVideoModal = document.getElementById('close-video-modal');
             const videoFrame = document.getElementById('video-frame');
             
             watchTrailerBtn.addEventListener('click', function() {
@@ -1018,13 +1412,12 @@
                 document.body.style.overflow = 'hidden';
             });
             
-            closeModal.addEventListener('click', function() {
+            closeVideoModal.addEventListener('click', function() {
                 videoModal.classList.remove('active');
                 videoFrame.src = "";
                 document.body.style.overflow = 'auto';
             });
             
-            // إغلاق المودال عند النقر خارجها
             videoModal.addEventListener('click', function(e) {
                 if (e.target === videoModal) {
                     videoModal.classList.remove('active');
@@ -1032,28 +1425,163 @@
                     document.body.style.overflow = 'auto';
                 }
             });
-            
-            // محاكاة البحث
-            const searchInput = document.querySelector('.search-box input');
-            searchInput.addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') {
-                    const searchTerm = this.value.trim();
-                    if (searchTerm) {
-                        alert(`بحث عن: ${searchTerm}`);
-                        // يمكنك توجيه المستخدم إلى صفحة البحث أو تصفية النتائج
+        }
+        
+        // إعداد نظام المفضلة
+        function setupFavorites() {
+            const favButtons = document.querySelectorAll('.fav-btn');
+            favButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const icon = this.querySelector('i');
+                    const seriesCard = this.closest('.series-card');
+                    const seriesId = seriesCard.querySelector('.watch-btn').getAttribute('data-series');
+                    
+                    if (icon.classList.contains('far')) {
+                        // إضافة إلى المفضلة
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        
+                        if (!userData.savedSeries.includes(seriesId)) {
+                            userData.savedSeries.push(seriesId);
+                            saveUserData();
+                            updateUserProfile();
+                        }
+                    } else {
+                        // إزالة من المفضلة
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        
+                        userData.savedSeries = userData.savedSeries.filter(id => id !== seriesId);
+                        saveUserData();
+                        updateUserProfile();
                     }
+                });
+            });
+        }
+        
+        // محاكاة بيانات Telegram (في الواقع سيتم جلبها من البوت)
+        function simulateTelegramData() {
+            // يمكن جلب هذه البيانات من Telegram WebApp
+            const telegramData = {
+                name: "أحمد محمد",
+                telegramUsername: "ahmed123",
+                savedSeries: ["persona", "remember-love"]
+            };
+            
+            // تحديث بيانات المستخدم
+            userData.name = telegramData.name;
+            userData.telegramUsername = telegramData.telegramUsername;
+            userData.savedSeries = telegramData.savedSeries;
+            
+            // إذا كان المستخدم جديداً، إضافة بعض ساعات المشاهدة العشوائية
+            if (userData.watchHours === 0) {
+                userData.watchHours = Math.floor(Math.random() * 50) + 10;
+                userData.weeklyWatchHours = Math.floor(Math.random() * 25);
+            }
+            
+            saveUserData();
+            updateUserProfile();
+        }
+        
+        // إعداد نظام البحث
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
                 }
+                
+                // تصفية المسلسلات بناءً على مصطلح البحث
+                const filteredSeries = sampleSeries.filter(series => 
+                    series.title.toLowerCase().includes(searchTerm)
+                    .slice(0, 5); // عرض أول 5 نتائج فقط
+                
+                if (filteredSeries.length === 0) {
+                    searchResults.innerHTML = '<div class="search-result-item" style="justify-content: center; color: rgba(255,255,255,0.7);">لا توجد نتائج</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                searchResults.innerHTML = '';
+                filteredSeries.forEach(series => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `
+                        <img src="${series.image}" alt="${series.title}">
+                        <div class="search-result-info">
+                            <h5>${series.title}</h5>
+                            <p>${series.year} • ${series.views} مشاهدة</p>
+                        </div>
+                    `;
+                    item.addEventListener('click', () => {
+                        window.location.href = `series.html?id=${series.id}`;
+                    });
+                    searchResults.appendChild(item);
+                });
+                
+                searchResults.classList.add('active');
             });
             
-            // تأثيرات التمرير
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('.header');
-                if (window.scrollY > 50) {
-                    header.style.background = 'rgba(15, 14, 23, 0.98)';
-                } else {
-                    header.style.background = 'rgba(15, 14, 23, 0.95)';
+            // إغلاق نتائج البحث عند النقر خارجها
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) {
+                    searchResults.classList.remove('active');
                 }
             });
+        }
+        
+        // إعداد زر نسخ كود الإحالة
+        function setupReferralButton() {
+            const copyBtn = document.getElementById('copy-referral');
+            
+            copyBtn.addEventListener('click', function() {
+                const referralCode = document.getElementById('referral-code').textContent;
+                navigator.clipboard.writeText(referralCode).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        }
+        
+        // دالة لإضافة ساعات مشاهدة (ستستدعى عند مشاهدة الحلقات)
+        function addWatchHours(hours) {
+            userData.watchHours += hours;
+            userData.weeklyWatchHours += hours;
+            saveUserData();
+            updateUserProfile();
+        }
+        
+        // تفعيل الفئات
+        const categories = document.querySelectorAll('.category');
+        categories.forEach(category => {
+            category.addEventListener('click', function() {
+                categories.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const categoryName = this.textContent.trim();
+                // تصفية المسلسلات حسب الفئة
+                alert(`تم اختيار فئة: ${categoryName}`);
+            });
+        });
+        
+        // تأثيرات التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(15, 14, 23, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 14, 23, 0.95)';
+            }
         });
     </script>
 </body>
