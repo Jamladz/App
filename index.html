@@ -11,6 +11,7 @@
       color: white;
       text-align: center;
       padding: 30px;
+      margin: 0;
       overflow-x: hidden;
     }
 
@@ -34,51 +35,35 @@
       background-color: #e02929;
     }
 
-    #video-container {
+    #videoScreen {
       display: none;
-      margin-top: 30px;
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      transition: all 0.5s ease-in-out;
-    }
-
-    #video-container.fullscreen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      padding: 0;
+      background-color: black;
       z-index: 9999;
-      border-radius: 0;
     }
 
-    #video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    #videoScreen iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
 
     #closeBtn {
-      display: none;
-      position: fixed;
-      top: 10px;
-      right: 15px;
-      z-index: 10000;
+      position: absolute;
+      top: 15px;
+      right: 20px;
       background-color: rgba(0, 0, 0, 0.6);
       color: white;
       border: none;
-      font-size: 26px;
-      padding: 6px 14px;
+      font-size: 28px;
+      padding: 5px 12px;
       border-radius: 50%;
       cursor: pointer;
+      z-index: 10000;
     }
 
     #closeBtn:hover {
@@ -88,21 +73,22 @@
 </head>
 <body>
 
-  <h2>🎬 الحلقة 1 - مسلسلك المفضل</h2>
-  <p>اضغط على "شاهد الآن" لمتابعة الحلقة بعد مشاهدة إعلان قصير</p>
+  <div id="watchSection">
+    <h2>🎬 الحلقة 1 - مسلسلك المفضل</h2>
+    <p>اضغط على "شاهد الآن" لمتابعة الحلقة بعد مشاهدة إعلان قصير</p>
+    <button id="playBtn">👁️ شاهد الآن</button>
+  </div>
 
-  <button id="playBtn">👁️ شاهد الآن</button>
-  <button id="closeBtn">✕</button>
-
-  <div id="video-container">
-    <h3>✅ مشاهدة ممتعة!</h3>
+  <div id="videoScreen">
+    <button id="closeBtn">✕</button>
     <iframe src="https://geo.dailymotion.com/player.html?video=x9h1xe6" allowfullscreen></iframe>
   </div>
 
   <script>
     const playBtn = document.getElementById("playBtn");
+    const videoScreen = document.getElementById("videoScreen");
     const closeBtn = document.getElementById("closeBtn");
-    const videoContainer = document.getElementById("video-container");
+    const watchSection = document.getElementById("watchSection");
 
     playBtn.addEventListener("click", async () => {
       playBtn.disabled = true;
@@ -111,11 +97,9 @@
       try {
         await window.Adsgram.init({ blockId: "int-12037" }).show();
 
-        // عرض الفيديو في وضع ملء الشاشة
-        playBtn.style.display = "none";
-        videoContainer.style.display = "block";
-        videoContainer.classList.add("fullscreen");
-        closeBtn.style.display = "block";
+        // عند انتهاء الإعلان
+        videoScreen.style.display = "block";
+        watchSection.style.display = "none";
       } catch (error) {
         alert("❌ لم يتم عرض الإعلان. حاول مرة أخرى لاحقًا.");
         playBtn.disabled = false;
@@ -124,10 +108,8 @@
     });
 
     closeBtn.addEventListener("click", () => {
-      videoContainer.classList.remove("fullscreen");
-      videoContainer.style.display = "none";
-      closeBtn.style.display = "none";
-      playBtn.style.display = "inline-block";
+      videoScreen.style.display = "none";
+      watchSection.style.display = "block";
       playBtn.disabled = false;
       playBtn.textContent = "👁️ شاهد الآن";
     });
