@@ -266,23 +266,17 @@
         }
         
         .watch-trailer-btn {
-            background: var(--gradient);
-            color: var(--dark);
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
             border: none;
             padding: 12px 25px;
             border-radius: 30px;
             font-weight: 700;
             font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            cursor: not-allowed;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-        
-        .watch-trailer-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
         }
         
         .fav-btn {
@@ -332,6 +326,22 @@
             height: 3px;
             background: var(--gradient);
             border-radius: 3px;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
         }
         
         /* Episodes Grid */
@@ -447,126 +457,45 @@
             box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
         }
         
-        /* Video Player Modal */
-        .video-modal {
+        .watch-episode-btn.loading {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        /* Video Player Screen */
+        .video-screen {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
         }
         
-        .video-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-        
-        .video-modal-content {
-            width: 80%;
-            max-width: 1000px;
-            position: relative;
-        }
-        
-        .close-video-modal {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .close-video-modal:hover {
-            color: var(--primary);
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-screen iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 8px;
         }
         
-        /* Ad Modal */
-        .ad-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .ad-modal.active {
-            display: flex;
-        }
-        
-        .ad-content {
-            max-width: 600px;
-            width: 100%;
-            background: var(--light-dark);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-        
-        .ad-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-        
-        .ad-message {
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .ad-timer {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .ad-skip-btn {
-            background: rgba(255, 255, 255, 0.1);
+        .close-video-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 700;
+            font-size: 28px;
+            padding: 5px 12px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
+            z-index: 10000;
         }
         
-        .ad-skip-btn:hover {
-            background: var(--primary);
+        .close-video-btn:hover {
+            background-color: rgba(255, 0, 0, 0.8);
         }
         
         /* Footer */
@@ -685,10 +614,6 @@
             .episodes-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-            
-            .video-modal-content {
-                width: 95%;
-            }
         }
         
         @media (max-width: 576px) {
@@ -789,7 +714,7 @@
                     مما يدفعها للبحث عن الحقيقة وسط شبكة من الأكاذيب والخداع.
                 </p>
                 <div class="series-actions">
-                    <button class="watch-trailer-btn">
+                    <button class="watch-trailer-btn" disabled>
                         <i class="fas fa-play"></i> شاهد المقدمة
                     </button>
                     <button class="fav-btn">
@@ -802,6 +727,11 @@
     
     <!-- Main Content -->
     <main class="main">
+        <!-- Back Button -->
+        <a href="series.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i> العودة إلى المسلسلات
+        </a>
+        
         <!-- Episodes Section -->
         <div class="section-title">
             <h3>الحلقات</h3>
@@ -959,16 +889,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Similar Series -->
-        <div class="section-title">
-            <h3>مسلسلات مشابهة</h3>
-            <a href="categories.html">عرض الكل</a>
-        </div>
-        
-        <div class="episodes-grid">
-            <!-- يمكن إضافة مسلسلات مشابهة هنا -->
-        </div>
     </main>
     
     <!-- Footer -->
@@ -1011,143 +931,65 @@
         </div>
     </footer>
     
-    <!-- Video Player Modal -->
-    <div class="video-modal" id="video-modal">
-        <div class="video-modal-content">
-            <span class="close-video-modal" id="close-video-modal">×</span>
-            <div class="video-container">
-                <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Ad Modal -->
-    <div class="ad-modal" id="ad-modal">
-        <div class="ad-content">
-            <h3 class="ad-title">شاهد إعلانًا قصيرًا</h3>
-            <p class="ad-message">
-                شكراً لاستخدامك Shasha TV. يرجى مشاهدة إعلان قصير لدعمنا، ثم يمكنك متابعة الحلقة.
-            </p>
-            <div class="ad-timer" id="ad-timer">سيبدأ الإعلان خلال: 5 ثواني</div>
-            <button class="ad-skip-btn" id="ad-skip-btn" disabled>تخطي الإعلان (5)</button>
-        </div>
+    <!-- Video Player Screen -->
+    <div class="video-screen" id="videoScreen">
+        <button class="close-video-btn" id="closeVideoBtn">✕</button>
+        <iframe id="videoFrame" src="" allowfullscreen></iframe>
     </div>
     
     <script>
-        // تفعيل أزرار مشاهدة الحلقات
+        // تفعيل أزرار مشاهدة الحلقات مع نظام الإعلانات
         document.querySelectorAll('.watch-episode-btn').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', async function() {
                 const episodeNumber = this.getAttribute('data-episode');
-                showAdBeforeEpisode(episodeNumber);
-            });
-        });
-        
-        // تفعيل زر مشاهدة المقدمة
-        document.querySelector('.watch-trailer-btn').addEventListener('click', function() {
-            showAdBeforeEpisode('trailer');
-        });
-        
-        // تفعيل زر الإغلاق في مشغل الفيديو
-        document.getElementById('close-video-modal').addEventListener('click', function() {
-            document.getElementById('video-modal').classList.remove('active');
-            document.getElementById('video-frame').src = "";
-            document.body.style.overflow = 'auto';
-        });
-        
-        // دالة لعرض الإعلان قبل الحلقة
-        function showAdBeforeEpisode(episode) {
-            const adModal = document.getElementById('ad-modal');
-            const adTimer = document.getElementById('ad-timer');
-            const skipBtn = document.getElementById('ad-skip-btn');
-            
-            adModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            let seconds = 5;
-            const timer = setInterval(() => {
-                seconds--;
-                adTimer.textContent = `سيبدأ الإعلان خلال: ${seconds} ثواني`;
-                skipBtn.textContent = `تخطي الإعلان (${seconds})`;
+                const button = this;
                 
-                if (seconds <= 0) {
-                    clearInterval(timer);
-                    skipBtn.textContent = "تخطي الإعلان";
-                    skipBtn.disabled = false;
-                    startAd(episode);
-                }
-            }, 1000);
-            
-            skipBtn.addEventListener('click', function() {
-                if (!this.disabled) {
-                    clearInterval(timer);
-                    adModal.classList.remove('active');
-                    playEpisode(episode);
-                }
-            });
-        }
-        
-        // دالة لعرض الإعلان
-        function startAd(episode) {
-            const adModal = document.getElementById('ad-modal');
-            const adContent = adModal.querySelector('.ad-content');
-            
-            adContent.innerHTML = `
-                <h3 class="ad-title">جاري عرض الإعلان</h3>
-                <p class="ad-message">
-                    شكراً لدعمك. يرجى الانتظار حتى انتهاء الإعلان لمشاهدة الحلقة.
-                </p>
-                <div class="ad-timer" id="ad-timer">متبقي: 15 ثانية</div>
-                <button class="ad-skip-btn" id="ad-skip-btn" disabled>تخطي الإعلان (15)</button>
-            `;
-            
-            let seconds = 15;
-            const timer = setInterval(() => {
-                seconds--;
-                document.getElementById('ad-timer').textContent = `متبقي: ${seconds} ثانية`;
-                document.getElementById('ad-skip-btn').textContent = `تخطي الإعلان (${seconds})`;
+                // تغيير حالة الزر إلى التحميل
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+                button.classList.add('loading');
                 
-                if (seconds <= 0) {
-                    clearInterval(timer);
-                    document.getElementById('ad-skip-btn').textContent = "تخطي الإعلان";
-                    document.getElementById('ad-skip-btn').disabled = false;
-                }
-            }, 1000);
-            
-            document.getElementById('ad-skip-btn').addEventListener('click', function() {
-                if (!this.disabled) {
-                    clearInterval(timer);
-                    adModal.classList.remove('active');
-                    playEpisode(episode);
+                try {
+                    // عرض الإعلان من Adsgram
+                    await window.Adsgram.init({ blockId: "int-12037" }).show();
+                    
+                    // بعد انتهاء الإعلان، تشغيل الحلقة
+                    playEpisode(episodeNumber);
+                    
+                    // إعادة حالة الزر إلى الطبيعي
+                    button.innerHTML = '<i class="fas fa-play"></i> شاهد الحلقة';
+                    button.classList.remove('loading');
+                } catch (error) {
+                    console.error('Error showing ad:', error);
+                    alert('❌ حدث خطأ أثناء عرض الإعلان. يرجى المحاولة مرة أخرى.');
+                    
+                    // إعادة حالة الزر إلى الطبيعي في حالة الخطأ
+                    button.innerHTML = '<i class="fas fa-play"></i> شاهد الحلقة';
+                    button.classList.remove('loading');
                 }
             });
-            
-            // بدلاً من عرض إعلان حقيقي، سنستخدم setTimeout لمحاكاة الإعلان
-            // في الواقع الفعلي، يمكنك استخدام مكتبة الإعلانات هنا
-            setTimeout(() => {
-                if (seconds > 0) {
-                    clearInterval(timer);
-                    adModal.classList.remove('active');
-                    playEpisode(episode);
-                }
-            }, 15000);
-        }
+        });
         
-        // دالة لتشغيل الحلقة بعد الإعلان
-        function playEpisode(episode) {
-            const videoModal = document.getElementById('video-modal');
-            const videoFrame = document.getElementById('video-frame');
+        // دالة لتشغيل الحلقة
+        function playEpisode(episodeNumber) {
+            const videoScreen = document.getElementById('videoScreen');
+            const videoFrame = document.getElementById('videoFrame');
             
             // هنا يمكنك تغيير رابط الفيديو بناءً على رقم الحلقة
-            let videoUrl;
-            if (episode === 'trailer') {
-                videoUrl = 'https://www.youtube.com/embed/EXAMPLE_TRAILER_ID?autoplay=1';
-            } else {
-                videoUrl = `https://www.youtube.com/embed/EXAMPLE_EPISODE_${episode}_ID?autoplay=1`;
-            }
-            
-            videoFrame.src = videoUrl;
-            videoModal.classList.add('active');
+            // هذا مثال باستخدام Dailymotion
+            videoFrame.src = `https://geo.dailymotion.com/player.html?video=x9h1xe6&episode=${episodeNumber}`;
+            videoScreen.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
+        
+        // زر إغلاق الفيديو
+        document.getElementById('closeVideoBtn').addEventListener('click', function() {
+            const videoScreen = document.getElementById('videoScreen');
+            const videoFrame = document.getElementById('videoFrame');
+            
+            videoFrame.src = '';
+            videoScreen.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
         
         // تأثيرات التمرير للهيدر
         window.addEventListener('scroll', function() {
