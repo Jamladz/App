@@ -1,65 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>إعلان + فيديو</title>
+  <title>مشاهدة المسلسل</title>
   <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   <style>
     body {
+      font-family: "Tajawal", sans-serif;
+      background-color: #111;
+      color: white;
       text-align: center;
-      font-family: sans-serif;
       padding: 30px;
-      background-color: #f9f9f9;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #ff3c3c;
+      color: white;
+      font-size: 18px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #e02929;
     }
     #video-container {
       display: none;
-      margin-top: 20px;
+      margin-top: 30px;
     }
     iframe {
       width: 100%;
+      max-width: 720px;
       height: 400px;
       border: none;
-      border-radius: 10px;
-    }
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
 <body>
 
-  <h2>🎬 إعلان ثم فيديو</h2>
-  <p>اضغط على الزر لمشاهدة الإعلان أولاً</p>
+  <h2>🎬 الحلقة 1 - مسلسلك المفضل</h2>
+  <p>اضغط على "شاهد الآن" لمتابعة الحلقة بعد مشاهدة إعلان قصير</p>
 
-  <adsgram-task id="adsgramAd" data-block-id="int-12037" style="display: none;"></adsgram-task>
-
-  <button id="showAdBtn">👁️ شاهد الإعلان</button>
+  <button id="playBtn">👁️ شاهد الآن</button>
 
   <div id="video-container">
-    <h3>✅ شكراً! الآن يمكنك مشاهدة الفيديو:</h3>
+    <h3>✅ مشاهدة ممتعة!</h3>
     <iframe src="https://geo.dailymotion.com/player.html?video=x9h1xe6" allowfullscreen></iframe>
   </div>
 
   <script>
-    const showAdBtn = document.getElementById("showAdBtn");
-    const adBlock = document.getElementById("adsgramAd");
-    const videoContainer = document.getElementById("video-container");
+    const button = document.getElementById("playBtn");
+    const video = document.getElementById("video-container");
 
-    showAdBtn.addEventListener("click", () => {
-      showAdBtn.style.display = "none";
-      adBlock.style.display = "block";
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      button.textContent = "🔄 جاري عرض الإعلان...";
 
-      // الاستماع لانتهاء الإعلان
-      document.addEventListener("adsgram-task-finish", () => {
-        adBlock.style.display = "none";
-        videoContainer.style.display = "block";
-      });
+      try {
+        await window.Adsgram.init({ blockId: "int-12037" }).show();
+
+        // عند نجاح عرض الإعلان
+        button.style.display = "none";
+        video.style.display = "block";
+      } catch (error) {
+        alert("❌ لم يتم عرض الإعلان. حاول مرة أخرى لاحقًا.");
+        button.disabled = false;
+        button.textContent = "👁️ شاهد الآن";
+      }
     });
   </script>
 
