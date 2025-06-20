@@ -134,25 +134,32 @@
             opacity: 0.7;
         }
         
-        .user-profile {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        /* زر الرجوع العائم */
+        .floating-back-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
             background: var(--gradient);
+            color: var(--dark);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            position: relative;
+            gap: 8px;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+            text-decoration: none;
         }
         
-        .user-profile:hover {
-            transform: scale(1.1);
-        }
-        
-        .user-profile i {
-            color: var(--dark);
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         
         /* Hero Section - Series Page */
@@ -614,6 +621,13 @@
             .episodes-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+            
+            .floating-back-btn {
+                bottom: 20px;
+                left: 20px;
+                padding: 10px 15px;
+                font-size: 14px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -656,6 +670,13 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
+            
+            .floating-back-btn {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -679,9 +700,6 @@
             <div class="search-box">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="ابحث عن مسلسل...">
-            </div>
-            <div class="user-profile">
-                <i class="fas fa-user"></i>
             </div>
         </div>
     </header>
@@ -890,6 +908,11 @@
             </div>
         </div>
     </main>
+    
+    <!-- زر الرجوع العائم -->
+    <a href="series.html" class="floating-back-btn">
+        <i class="fas fa-arrow-right"></i> العودة
+    </a>
     
     <!-- Footer -->
     <footer class="footer">
