@@ -134,31 +134,41 @@
             opacity: 0.7;
         }
         
-        /* زر الرجوع العائم */
+        /* زر الرجوع العائم الكبير */
         .floating-back-btn {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 40px;
+            left: 40px;
             background: var(--gradient);
             color: var(--dark);
             border: none;
-            padding: 12px 20px;
-            border-radius: 30px;
+            padding: 18px 30px;
+            border-radius: 35px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             z-index: 999;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             animation: float 3s ease-in-out infinite;
             text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-back-btn:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .floating-back-btn i {
+            font-size: 22px;
         }
         
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
             100% { transform: translateY(0px); }
         }
         
@@ -623,10 +633,10 @@
             }
             
             .floating-back-btn {
-                bottom: 20px;
-                left: 20px;
-                padding: 10px 15px;
-                font-size: 14px;
+                bottom: 30px;
+                left: 30px;
+                padding: 15px 25px;
+                font-size: 18px;
             }
         }
         
@@ -672,10 +682,10 @@
             }
             
             .floating-back-btn {
-                bottom: 15px;
-                left: 15px;
-                padding: 8px 12px;
-                font-size: 12px;
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 16px;
             }
         }
     </style>
@@ -909,9 +919,9 @@
         </div>
     </main>
     
-    <!-- زر الرجوع العائم -->
+    <!-- زر الرجوع العائم الكبير -->
     <a href="series.html" class="floating-back-btn">
-        <i class="fas fa-arrow-right"></i> العودة
+        <i class="fas fa-arrow-right"></i> العودة للمسلسلات
     </a>
     
     <!-- Footer -->
