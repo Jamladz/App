@@ -66,8 +66,23 @@
       border: none;
     }
 
-    #rotateBtn {
+    #closeBtn {
       display: none;
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      z-index: 10000;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      font-size: 26px;
+      padding: 6px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #closeBtn:hover {
+      background-color: rgba(255, 0, 0, 0.8);
     }
   </style>
 </head>
@@ -77,7 +92,7 @@
   <p>اضغط على "شاهد الآن" لمتابعة الحلقة بعد مشاهدة إعلان قصير</p>
 
   <button id="playBtn">👁️ شاهد الآن</button>
-  <button id="rotateBtn">🔄 تدوير الفيديو</button>
+  <button id="closeBtn">✕</button>
 
   <div id="video-container">
     <h3>✅ مشاهدة ممتعة!</h3>
@@ -86,7 +101,7 @@
 
   <script>
     const playBtn = document.getElementById("playBtn");
-    const rotateBtn = document.getElementById("rotateBtn");
+    const closeBtn = document.getElementById("closeBtn");
     const videoContainer = document.getElementById("video-container");
 
     playBtn.addEventListener("click", async () => {
@@ -96,10 +111,11 @@
       try {
         await window.Adsgram.init({ blockId: "int-12037" }).show();
 
-        // بعد عرض الإعلان
+        // عرض الفيديو في وضع ملء الشاشة
         playBtn.style.display = "none";
         videoContainer.style.display = "block";
-        rotateBtn.style.display = "inline-block";
+        videoContainer.classList.add("fullscreen");
+        closeBtn.style.display = "block";
       } catch (error) {
         alert("❌ لم يتم عرض الإعلان. حاول مرة أخرى لاحقًا.");
         playBtn.disabled = false;
@@ -107,8 +123,13 @@
       }
     });
 
-    rotateBtn.addEventListener("click", () => {
-      videoContainer.classList.toggle("fullscreen");
+    closeBtn.addEventListener("click", () => {
+      videoContainer.classList.remove("fullscreen");
+      videoContainer.style.display = "none";
+      closeBtn.style.display = "none";
+      playBtn.style.display = "inline-block";
+      playBtn.disabled = false;
+      playBtn.textContent = "👁️ شاهد الآن";
     });
   </script>
 
