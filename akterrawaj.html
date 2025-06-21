@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shasha TV - الأكثر مشاهدة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF2E63;
+            --secondary: #08D9D6;
+            --dark: #0F0E17;
+            --light-dark: #252A34;
+            --light: #EAEAEA;
+            --gradient: linear-gradient(135deg, #FF2E63 0%, #08D9D6 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 14, 23, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            background: var(--light-dark);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px 10px 45px;
+            color: var(--light);
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(8, 217, 214, 0.3);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light);
+            opacity: 0.7;
+        }
+        
+        .user-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .user-profile:hover {
+            transform: scale(1.1);
+        }
+        
+        .user-profile i {
+            color: var(--dark);
+        }
+        
+        /* نافذة الملف الشخصي المنبثقة */
+        .profile-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--light-dark);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            padding: 25px;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* طبقة التغطية */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--dark);
+            font-weight: bold;
+        }
+        
+        .profile-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .profile-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-item .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .stat-item .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .referral-section {
+            background: rgba(255, 46, 99, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px dashed var(--primary);
+        }
+        
+        .referral-section h5 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .referral-code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .copy-referral {
+            background: var(--gradient);
+            color: var(--dark);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-referral:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+        }
+        
+        .saved-series {
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .saved-series::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .saved-series::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        .saved-series-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .saved-series-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .saved-series-item:last-child {
+            border-bottom: none;
+        }
+        
+        .saved-series-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .saved-series-item h6 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .saved-series-item p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Search Results Dropdown */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--light-dark);
+            border-radius: 0 0 10px 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-result-item {
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .search-result-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .search-result-info h5 {
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .search-result-info p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Hero Section - Modified for Most Watched Page */
+        .hero-most-watched {
+            margin-top: 80px;
+            padding: 80px 5%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.ibb.co/4W2Dz5D/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
+        }
+        
+        .hero-most-watched::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(transparent, var(--dark));
+            z-index: 1;
+        }
+        
+        .hero-most-watched h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 2;
+        }
+        
+        .hero-most-watched p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 700px;
+            z-index: 2;
+        }
+        
+        /* Back to Home Button */
+        .back-to-home {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            background: var(--gradient);
+            color: var(--dark);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .back-to-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 46, 99, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Main Content */
+        .main {
+            padding: 50px 5%;
+        }
+        
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h3 {
+            font-size: 24px;
+            position: relative;
+            padding-right: 15px;
+        }
+        
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+        
+        .section-title a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .section-title a:hover {
+            color: var(--primary);
+        }
+        
+        /* Series Grid */
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .series-card {
+            background-color: var(--light-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .series-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .series-image-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+        
+        .series-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .series-card:hover .series-image {
+            transform: scale(1.1);
+        }
+        
+        .series-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(255, 46, 99, 0.3);
+        }
+        
+        .series-info {
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .series-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .series-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .series-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #FFD700;
+        }
+        
+        .series-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--secondary);
+        }
+        
+        .series-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .series-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .watch-btn {
+            background: var(--gradient);
+            color: var(--dark);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .watch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+        }
+        
+        .fav-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Categories */
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category:hover, .category.active {
+            background: var(--gradient);
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--light-dark);
+            padding: 50px 5% 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-right: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        /* Video Player Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .video-modal-content {
+            width: 80%;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        .close-video-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-video-modal:hover {
+            color: var(--primary);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        /* زر الإغلاق (X) للنافذة المنبثقة */
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 46, 99, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .close-popup:hover {
+            background: rgba(255, 46, 99, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-most-watched h2 {
+                font-size: 2.5rem;
+            }
+            
+            .series-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-most-watched {
+                padding: 60px 5%;
+            }
+            
+            .hero-most-watched h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-most-watched p {
+                font-size: 1rem;
+            }
+            
+            .series-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .series-image-container {
+                height: 250px;
+            }
+            
+            .video-modal-content {
+                width: 95%;
+            }
+            
+            .back-to-home {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header {
+                padding: 15px;
+            }
+            
+            .logo h1 {
+                font-size: 20px;
+            }
+            
+            .search-box input {
+                width: 150px;
+                padding: 8px 15px 8px 35px;
+            }
+            
+            .search-box input:focus {
+                width: 180px;
+            }
+            
+            .hero-most-watched {
+                padding: 50px 15px;
+            }
+            
+            .hero-most-watched h2 {
+                font-size: 1.8rem;
+            }
+            
+            .main {
+                padding: 30px 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .back-to-home {
+                bottom: 15px;
+                left: 15px;
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-tv"></i>
+            <h1>Shasha TV</h1>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="series.html">المسلسلات</a>
+            <a href="categories.html">التصنيفات</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="trending.html" class="active">الأكثر مشاهدة</a>
+        </nav>
+        
+        <div class="user-actions">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="ابحث عن مسلسل...">
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="user-profile" id="user-profile">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- زر العودة للصفحة الرئيسية -->
+    <button class="back-to-home" onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i> الرئيسية
+    </button>
+    
+    <!-- نافذة الملف الشخصي المنبثقة -->
+    <div class="profile-popup" id="profile-popup">
+        <!-- زر الإغلاق (X) -->
+        <div class="close-popup" id="close-popup">
+            <i class="fas fa-times"></i>
+        </div>
+        
+        <div class="profile-header">
+            <div class="profile-avatar" id="user-avatar">?</div>
+            <div class="profile-info">
+                <h4 id="username">زائر</h4>
+                <p id="user-telegram">غير متصل ب Telegram</p>
+            </div>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="watch-hours">0</div>
+                <div class="stat-label">ساعات مشاهدة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="saved-count">0</div>
+                <div class="stat-label">مسلسلات محفوظة</div>
+            </div>
+        </div>
+        
+        <div class="referral-section">
+            <h5>دعوة الأصدقاء واحصل على مكافآت!</h5>
+            <div class="referral-code" id="referral-code">https://t.me/ShashaTVBot?start</div>
+            <button class="copy-referral" id="copy-referral">
+                <i class="fas fa-copy"></i> نسخ كود الإحالة
+            </button>
+        </div>
+        
+        <h4 class="saved-series-title">مسلسلاتك المحفوظة</h4>
+        <div class="saved-series" id="saved-series">
+            <!-- سيتم ملؤها بالمسلسلات المحفوظة -->
+        </div>
+    </div>
+    
+    <!-- طبقة التغطية للنافذة المنبثقة -->
+    <div class="popup-overlay" id="popup-overlay"></div>
+    
+    <!-- Hero Section - Modified for Most Watched Page -->
+    <section class="hero-most-watched fade-in">
+        <h2>الأكثر مشاهدة هذا الأسبوع</h2>
+        <p>استكشف المسلسلات التركية الأكثر شعبية والتي يحبها المشاهدون. شاهد ما يتابعه الجميع الآن!</p>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Categories -->
+        <div class="categories">
+            <div class="category active">الكل</div>
+            <div class="category">رومانسي</div>
+            <div class="category">دراما</div>
+            <div class="category">تشويق</div>
+            <div class="category">تاريخي</div>
+            <div class="category">كوميدي</div>
+            <div class="category">إثارة</div>
+            <div class="category">خيال علمي</div>
+        </div>
+        
+        <!-- Top Rated Series -->
+        <div class="section-title fade-in">
+            <h3>الأعلى تقييمًا</h3>
+            <span>حسب تقييمات المشاهدين</span>
+        </div>
+        
+        <div class="series-grid">
+            <!-- مسلسل العشق الأسود -->
+            <div class="series-card fade-in delay-1">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/XkXQ0/l" alt="العشق الأسود" class="series-image">
+                    <div class="series-badge">الأعلى تقييمًا</div>
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">العشق الأسود</h3>
+                    <div class="series-meta">
+                        <span>2023</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.3</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>14.7M مشاهدة</span>
+                    </div>
+                    <p class="series-description">قصة حب محرمة بين شاب وفتاة من عائلتين متنافستين، مليئة بالعواطف الجياشة والتحديات.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/black-love'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مسلسل المدينة البعيدة -->
+            <div class="series-card fade-in delay-2">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/gPwQK/l" alt="المدينة البعيدة" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">المدينة البعيدة</h3>
+                    <div class="series-meta">
+                        <span>2022</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.1</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>12.8M مشاهدة</span>
+                    </div>
+                    <p class="series-description">رحلة مثيرة إلى مدينة غامضة حيث تختلط الأقدار وتتغير حياة مجموعة من الأشخاص إلى الأبد.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/distant-city'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مسلسل أبناء الشمس -->
+            <div class="series-card fade-in delay-3">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/QkXQ0/l" alt="أبناء الشمس" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">أبناء الشمس</h3>
+                    <div class="series-meta">
+                        <span>2021</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.0</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>10.3M مشاهدة</span>
+                    </div>
+                    <p class="series-description">ملحمة تاريخية تروي قصة صراع بين قبيلتين في الأناضول القديمة، مليئة بالبطولات والخيانات والمصير المحتوم.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/sons-of-sun'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Most Watched Series -->
+        <div class="section-title fade-in">
+            <h3>الأكثر مشاهدة</h3>
+            <span>حسب عدد المشاهدات هذا الأسبوع</span>
+        </div>
+        
+        <div class="series-grid">
+            <!-- مسلسل شخص آخر -->
+            <div class="series-card fade-in delay-1">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/VzVL0/l" alt="شخص آخر" class="series-image">
+                    <div class="series-badge">الأعلى مشاهدة</div>
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">شخص آخر</h3>
+                    <div class="series-meta">
+                        <span>2023</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.5</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>15.2M مشاهدة</span>
+                    </div>
+                    <p class="series-description">قصة مثيرة عن هوية مزدوجة وحب محفوف بالمخاطر عندما تكتشف امرأة أنها ليست الشخص الذي اعتقدت أنها تكونه.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://jamladz.github.io/App/chakhes1'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مسلسل تذكر الحب -->
+            <div class="series-card fade-in delay-2">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/9lQG0/l" alt="تذكر الحب" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">تذكر الحب</h3>
+                    <div class="series-meta">
+                        <span>2023</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.8</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>13.5M مشاهدة</span>
+                    </div>
+                    <p class="series-description">قصة حب مؤثرة تتحدى الزمن عندما يفقد رجل ذاكرته ويحاول حبيبته مساعدته على تذكر حبهما.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/remember-love'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مسلسل أسوار الحب -->
+            <div class="series-card fade-in delay-3">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/7lwQK/l" alt="أسوار الحب" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">أسوار الحب</h3>
+                    <div class="series-meta">
+                        <span>2022</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.9</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>12.1M مشاهدة</span>
+                    </div>
+                    <p class="series-description">قصة حب محرم بين شاب وفتاة من عائلتين متنافستين في بلدة صغيرة، مليئة بالعواطف الجياشة والتحديات.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/love-walls'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trending This Month -->
+        <div class="section-title fade-in">
+            <h3>الأكثر رواجًا هذا الشهر</h3>
+            <span>المسلسلات الأسرع نموًا في المشاهدات</span>
+        </div>
+        
+        <div class="series-grid">
+            <!-- مسلسل الظل -->
+            <div class="series-card fade-in delay-1">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/PzVL0/l" alt="الظل" class="series-image">
+                    <div class="series-badge">جديد</div>
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">الظل</h3>
+                    <div class="series-meta">
+                        <span>2023</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>11.8M مشاهدة</span>
+                    </div>
+                    <p class="series-description">تشويق وإثارة عندما يكتشف محقق وجود قاتل متسلسل يقلده في جرائمه، في سباق ضد الزمن لوقف المزيد من الضحايا.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/the-shadow'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مسلسل قلب الشتاء -->
+            <div class="series-card fade-in delay-2">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/JkXQ0/l" alt="قلب الشتاء" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">قلب الشتاء</h3>
+                    <div class="series-meta">
+                        <span>2023</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.6</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>10.9M مشاهدة</span>
+                    </div>
+                    <p class="series-description">دراما عائلية مؤثرة تروي قصة عائلة تواجه تحديات كبيرة خلال فصل الشتاء القاسي في قرية نائية.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/winter-heart'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مسلسل ألف ليلة وليلة -->
+            <div class="series-card fade-in delay-3">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/MzB40/l" alt="ألف ليلة وليلة" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">ألف ليلة وليلة</h3>
+                    <div class="series-meta">
+                        <span>2021</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.3</span>
+                        </div>
+                    </div>
+                    <div class="series-views">
+                        <i class="fas fa-eye"></i>
+                        <span>9.7M مشاهدة</span>
+                    </div>
+                    <p class="series-description">إعادة سردية معاصرة للحكايات الخالدة من ألف ليلة وليلة، مليئة بالسحر والمغامرة والرومانسية.</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/1001-nights'">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Shasha TV</h4>
+                <p>أفضل منصة لمشاهدة المسلسلات التركية المترجمة بجودة عالية وترجمة احترافية.</p>
+                <div class="social-links">
+                    <a href="https://t.me/ShashaTVBot" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="index.html">الصفحة الرئيسية</a></li>
+                    <li><a href="series.html">المسلسلات</a></li>
+                    <li><a href="categories.html">التصنيفات</a></li>
+                    <li><a href="favorites.html">المفضلة</a></li>
+                    <li><a href="trending.html">الأكثر مشاهدة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>الفئات</h4>
+                <ul>
+                    <li><a href="category.html?type=romance">رومانسي</a></li>
+                    <li><a href="category.html?type=drama">دراما</a></li>
+                    <li><a href="category.html?type=thriller">تشويق</a></li>
+                    <li><a href="category.html?type=historical">تاريخي</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 Shasha TV. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="video-modal-content">
+            <span class="close-video-modal" id="close-video-modal">×</span>
+            <div class="video-container">
+                <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // بيانات المستخدم (ستتم جلبها من Telegram أو localStorage)
+        let userData = {
+            name: "",
+            telegramUsername: "",
+            savedSeries: [],
+            watchHours: 0,
+            weeklyWatchHours: 0,
+            lastReset: null,
+            isLoggedIn: false
+        };
+        
+        // مسلسلات المثال
+        const sampleSeries = [
+            { 
+                id: "persona", 
+                title: "شخص آخر", 
+                image: "https://i.suar.me/VzVL0/l", 
+                year: "2023", 
+                rating: "8.5",
+                views: "15.2M",
+                link: "https://jamladz.github.io/App/chakhes1"
+            },
+            { 
+                id: "distant-city", 
+                title: "المدينة البعيدة", 
+                image: "https://i.suar.me/gPwQK/l", 
+                year: "2022", 
+                rating: "9.1",
+                views: "12.8M",
+                link: "https://example.com/series/distant-city"
+            },
+            { 
+                id: "remember-love", 
+                title: "تذكر الحب", 
+                image: "https://i.suar.me/9lQG0/l", 
+                year: "2023", 
+                rating: "8.8",
+                views: "11.5M",
+                link: "https://example.com/series/remember-love"
+            },
+            { 
+                id: "1001-nights", 
+                title: "ألف ليلة وليلة", 
+                image: "https://i.suar.me/MzB40/l", 
+                year: "2021", 
+                rating: "8.3",
+                views: "10.7M",
+                link: "https://example.com/series/1001-nights"
+            },
+            { 
+                id: "winter-heart", 
+                title: "قلب الشتاء", 
+                image: "https://i.suar.me/JkXQ0/l", 
+                year: "2023", 
+                rating: "8.6",
+                views: "9.8M",
+                link: "https://example.com/series/winter-heart"
+            },
+            { 
+                id: "love-walls", 
+                title: "أسوار الحب", 
+                image: "https://i.suar.me/7lwQK/l", 
+                year: "2022", 
+                rating: "8.9",
+                views: "9.2M",
+                link: "https://example.com/series/love-walls"
+            },
+            { 
+                id: "the-shadow", 
+                title: "الظل", 
+                image: "https://i.suar.me/PzVL0/l", 
+                year: "2023", 
+                rating: "8.7",
+                views: "8.5M",
+                link: "https://example.com/series/the-shadow"
+            },
+            { 
+                id: "sons-of-sun", 
+                title: "أبناء الشمس", 
+                image: "https://i.suar.me/QkXQ0/l", 
+                year: "2021", 
+                rating: "9.0",
+                views: "8.1M",
+                link: "https://example.com/series/sons-of-sun"
+            },
+            { 
+                id: "black-love", 
+                title: "العشق الأسود", 
+                image: "https://i.suar.me/XkXQ0/l", 
+                year: "2023", 
+                rating: "9.3",
+                views: "14.7M",
+                link: "https://example.com/series/black-love"
+            }
+        ];
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحميل بيانات المستخدم من localStorage
+            loadUserData();
+            
+            // التحقق من إعادة تعيين الوقت الأسبوعي
+            checkWeeklyReset();
+            
+            // جلب بيانات Telegram إذا كانت متاحة
+            getTelegramUserData();
+            
+            // تحديث واجهة المستخدم
+            updateUserProfile();
+            
+            // تفعيل أزرار المفضلة
+            setupFavorites();
+            
+            // تفعيل النافذة المنبثقة للملف الشخصي
+            setupProfilePopup();
+            
+            // تفعيل مشغل الفيديو
+            setupVideoPlayer();
+            
+            // تفعيل نظام البحث
+            setupSearch();
+            
+            // تفعيل زر نسخ كود الإحالة
+            setupReferralButton();
+            
+            // تفعيل الفئات
+            setupCategories();
+            
+            // تفعيل أزرار المشاهدة
+            setupWatchButtons();
+        });
+        
+        // تفعيل أزرار المشاهدة
+        function setupWatchButtons() {
+            document.querySelectorAll('.watch-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const seriesId = this.getAttribute('data-series');
+                    const series = sampleSeries.find(s => s.id === seriesId);
+                    
+                    if (series) {
+                        // إضافة تأثير التحميل
+                        const originalContent = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
+                        
+                        // الانتقال إلى الرابط بعد تأخير بسيط
+                        setTimeout(() => {
+                            window.location.href = series.link;
+                        }, 500);
+                        
+                        // استعادة المحتوى الأصلي في حالة عدم الانتقال
+                        setTimeout(() => {
+                            this.innerHTML = originalContent;
+                        }, 2000);
+                    }
+                });
+            });
+        }
+        
+        // جلب بيانات المستخدم من Telegram WebApp
+        function getTelegramUserData() {
+            if (window.Telegram && Telegram.WebApp) {
+                Telegram.WebApp.ready();
+                Telegram.WebApp.expand();
+                
+                const user = Telegram.WebApp.initDataUnsafe?.user;
+                if (user) {
+                    userData.name = user.first_name || "";
+                    if (user.last_name) {
+                        userData.name += " " + user.last_name;
+                    }
+                    userData.telegramUsername = user.username || "";
+                    userData.isLoggedIn = true;
+                    
+                    // إذا كان المستخدم جديداً، إضافة بعض ساعات المشاهدة العشوائية
+                    if (userData.watchHours === 0) {
+                        userData.watchHours = Math.floor(Math.random() * 50) + 10;
+                        userData.weeklyWatchHours = Math.floor(Math.random() * 25);
+                    }
+                    
+                    saveUserData();
+                }
+            }
+        }
+        
+        // تحميل بيانات المستخدم من localStorage
+        function loadUserData() {
+            const savedData = localStorage.getItem('shashaTvUserData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+            }
+        }
+        
+        // حفظ بيانات المستخدم في localStorage
+        function saveUserData() {
+            localStorage.setItem('shashaTvUserData', JSON.stringify(userData));
+        }
+        
+        // التحقق من إعادة تعيين الوقت الأسبوعي كل يوم اثنين
+        function checkWeeklyReset() {
+            const now = new Date();
+            const lastReset = userData.lastReset ? new Date(userData.lastReset) : null;
+            
+            // إذا لم يكن هناك تاريخ إعادة تعيين أو كان اليوم اثنين ومر أسبوع على آخر إعادة تعيين
+            if (!lastReset || (now.getDay() === 1 && (now - lastReset) >= 7 * 24 * 60 * 60 * 1000)) {
+                userData.weeklyWatchHours = 0;
+                userData.lastReset = now.toISOString();
+                saveUserData();
+            }
+        }
+        
+        // تحديث واجهة الملف الشخصي
+        function updateUserProfile() {
+            document.getElementById('username').textContent = userData.name || "زائر";
+            document.getElementById('user-telegram').textContent = 
+                userData.telegramUsername ? `@${userData.telegramUsername}` : "غير متصل ب Telegram";
+            
+            // تحديث الصورة الرمزية
+            const avatar = document.getElementById('user-avatar');
+            if (userData.name) {
+                avatar.textContent = userData.name.charAt(0).toUpperCase();
+            } else {
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+            }
+            
+            // تحديث ساعات المشاهدة
+            document.getElementById('watch-hours').textContent = userData.watchHours;
+            
+            // تحديث المسلسلات المحفوظة
+            updateSavedSeries();
+        }
+        
+        // تحديث قائمة المسلسلات المحفوظة
+        function updateSavedSeries() {
+            const savedSeriesContainer = document.getElementById('saved-series');
+            const savedCountElement = document.getElementById('saved-count');
+            
+            if (userData.savedSeries.length === 0) {
+                savedSeriesContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5);">لا توجد مسلسلات محفوظة</p>';
+                savedCountElement.textContent = "0";
+                return;
+            }
+            
+            savedSeriesContainer.innerHTML = '';
+            savedCountElement.textContent = userData.savedSeries.length;
+            
+            userData.savedSeries.forEach(seriesId => {
+                const series = sampleSeries.find(s => s.id === seriesId);
+                if (series) {
+                    const seriesItem = document.createElement('div');
+                    seriesItem.className = 'saved-series-item';
+                    seriesItem.innerHTML = `
+                        <img src="${series.image}" alt="${series.title}">
+                        <div>
+                            <h6>${series.title}</h6>
+                            <p>${series.year} • ${series.views} مشاهدة</p>
+                        </div>
+                    `;
+                    seriesItem.addEventListener('click', () => {
+                        window.location.href = `series.html?id=${series.id}`;
+                    });
+                    savedSeriesContainer.appendChild(seriesItem);
+                }
+            });
+        }
+        
+        // إعداد النافذة المنبثقة للملف الشخصي
+        function setupProfilePopup() {
+            const profileBtn = document.getElementById('user-profile');
+            const popup = document.getElementById('profile-popup');
+            const overlay = document.getElementById('popup-overlay');
+            const closePopupBtn = document.getElementById('close-popup');
+            
+            profileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                popup.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // إغلاق النافذة عند النقر على زر الإغلاق (X)
+            closePopupBtn.addEventListener('click', function() {
+                popup.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // إغلاق النافذة عند النقر على overlay
+            overlay.addEventListener('click', function() {
+                popup.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // منع إغلاق النافذة عند النقر عليها
+            popup.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // إعداد مشغل الفيديو
+        function setupVideoPlayer() {
+            const watchButtons = document.querySelectorAll('.watch-btn');
+            const videoModal = document.getElementById('video-modal');
+            const closeVideoModal = document.getElementById('close-video-modal');
+            const videoFrame = document.getElementById('video-frame');
+            
+            watchButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const seriesId = this.getAttribute('data-series');
+                    // يمكنك تغيير رابط الفيديو هنا بناءً على المسلسل
+                    videoFrame.src = `https://www.youtube.com/embed/EXAMPLE_VIDEO_ID?autoplay=1&series=${seriesId}`;
+                    videoModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeVideoModal.addEventListener('click', function() {
+                videoModal.classList.remove('active');
+                videoFrame.src = "";
+                document.body.style.overflow = 'auto';
+            });
+            
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    videoModal.classList.remove('active');
+                    videoFrame.src = "";
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+        
+        // إعداد نظام المفضلة
+        function setupFavorites() {
+            const favButtons = document.querySelectorAll('.fav-btn');
+            favButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const icon = this.querySelector('i');
+                    const seriesCard = this.closest('.series-card');
+                    const seriesId = seriesCard.querySelector('.watch-btn').getAttribute('data-series');
+                    
+                    if (icon.classList.contains('far')) {
+                        // إضافة إلى المفضلة
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        
+                        if (!userData.savedSeries.includes(seriesId)) {
+                            userData.savedSeries.push(seriesId);
+                            saveUserData();
+                            updateUserProfile();
+                        }
+                    } else {
+                        // إزالة من المفضلة
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        
+                        userData.savedSeries = userData.savedSeries.filter(id => id !== seriesId);
+                        saveUserData();
+                        updateUserProfile();
+                    }
+                });
+            });
+        }
+        
+        // إعداد نظام البحث
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+                
+                // تصفية المسلسلات بناءً على مصطلح البحث
+                const filteredSeries = sampleSeries.filter(series => 
+                    series.title.toLowerCase().includes(searchTerm)
+                ).slice(0, 5); // عرض أول 5 نتائج فقط
+                
+                if (filteredSeries.length === 0) {
+                    searchResults.innerHTML = '<div class="search-result-item" style="justify-content: center; color: rgba(255,255,255,0.7);">لا توجد نتائج</div>';
+                    searchResults.classList.add('active');
+                    return;
+                }
+                
+                searchResults.innerHTML = '';
+                filteredSeries.forEach(series => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `
+                        <img src="${series.image}" alt="${series.title}">
+                        <div class="search-result-info">
+                            <h5>${series.title}</h5>
+                            <p>${series.year} • ${series.views} مشاهدة</p>
+                        </div>
+                    `;
+                    item.addEventListener('click', () => {
+                        window.location.href = `series.html?id=${series.id}`;
+                    });
+                    searchResults.appendChild(item);
+                });
+                
+                searchResults.classList.add('active');
+            });
+            
+            // إغلاق نتائج البحث عند النقر خارجها
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+        }
+        
+        // إعداد زر نسخ كود الإحالة
+        function setupReferralButton() {
+            const copyBtn = document.getElementById('copy-referral');
+            
+            copyBtn.addEventListener('click', function() {
+                const referralCode = document.getElementById('referral-code').textContent;
+                navigator.clipboard.writeText(referralCode).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        }
+        
+        // إعداد الفئات
+        function setupCategories() {
+            const categories = document.querySelectorAll('.category');
+            categories.forEach(category => {
+                category.addEventListener('click', function() {
+                    categories.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    const categoryName = this.textContent.trim();
+                    // تصفية المسلسلات حسب الفئة
+                    filterSeriesByCategory(categoryName);
+                });
+            });
+        }
+        
+        // تصفية المسلسلات حسب الفئة (وظيفة وهمية للتوضيح)
+        function filterSeriesByCategory(category) {
+            if (category === 'الكل') {
+                // عرض جميع المسلسلات
+                return;
+            }
+            // هنا يمكنك إضافة منطق التصفية حسب الفئة
+            alert(`تم اختيار فئة: ${category}`);
+        }
+        
+        // دالة لإضافة ساعات مشاهدة (ستستدعى عند مشاهدة الحلقات)
+        function addWatchHours(hours) {
+            userData.watchHours += hours;
+            userData.weeklyWatchHours += hours;
+            saveUserData();
+            updateUserProfile();
+        }
+        
+        // تأثيرات التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(15, 14, 23, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 14, 23, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
