@@ -774,64 +774,6 @@
             font-size: 14px;
         }
         
-        /* Video Player Modal */
-        .video-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .video-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-        
-        .video-modal-content {
-            width: 80%;
-            max-width: 1000px;
-            position: relative;
-        }
-        
-        .close-video-modal {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .close-video-modal:hover {
-            color: var(--primary);
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-        }
-        
         /* زر الإغلاق (X) للنافذة المنبثقة */
         .close-popup {
             position: absolute;
@@ -890,10 +832,6 @@
             
             .series-image-container {
                 height: 250px;
-            }
-            
-            .video-modal-content {
-                width: 95%;
             }
             
             .back-to-home {
@@ -984,11 +922,11 @@
         </div>
         
         <nav class="nav-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="series.html">المسلسلات</a>
-            <a href="categories.html">التصنيفات</a>
-            <a href="favorites.html">المفضلة</a>
-            <a href="trending.html" class="active">الأكثر مشاهدة</a>
+            <a href="https://jamladz.github.io/App/">الرئيسية</a>
+            <a href="https://jamladz.github.io/App/akterrawaj">المسلسلات</a>
+            <a href="#">التصنيفات</a>
+            <a href="#">المفضلة</a>
+            <a href="#" class="active">الأكثر مشاهدة</a>
         </nav>
         
         <div class="user-actions">
@@ -1078,16 +1016,16 @@
         </div>
         
         <div class="series-grid">
-            <!-- مسلسل العشق الأسود -->
+            <!-- مسلسل غرفة لشخصين-->
             <div class="series-card fade-in delay-1">
                 <div class="series-image-container">
-                    <img src="https://i.suar.me/XkXQ0/l" alt="العشق الأسود" class="series-image">
+                    <img src="https://i.suar.me/avNeO/l" alt="غرفة لشخصين" class="series-image">
                     <div class="series-badge">الأعلى تقييمًا</div>
                 </div>
                 <div class="series-info">
-                    <h3 class="series-title">العشق الأسود</h3>
+                    <h3 class="series-title">غرفة لشخصين</h3>
                     <div class="series-meta">
-                        <span>2023</span>
+                        <span>2025</span>
                         <div class="series-rating">
                             <i class="fas fa-star"></i>
                             <span>9.3</span>
@@ -1097,9 +1035,9 @@
                         <i class="fas fa-eye"></i>
                         <span>14.7M مشاهدة</span>
                     </div>
-                    <p class="series-description">قصة حب محرمة بين شاب وفتاة من عائلتين متنافستين، مليئة بالعواطف الجياشة والتحديات.</p>
+                    <p class="series-description"> حلم "نيلوفر"، التي فقدت والديها في سن صغيرة، هو العمل في فندق لوتيسيا الذي أسسه والداها. يعود "كان"، أحد ورثة الفندق، للانتقام من الفندق الذي حكمته أخته غير الشقيقة "سيفيل" </p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/black-love'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/ghorfali2">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1109,13 +1047,13 @@
                 </div>
             </div>
             
-            <!-- مسلسل المدينة البعيدة -->
+            <!-- مسلسل زوجة أخرى -->
             <div class="series-card fade-in delay-2">
                 <div class="series-image-container">
-                    <img src="https://i.suar.me/gPwQK/l" alt="المدينة البعيدة" class="series-image">
+                    <img src="https://i.suar.me/3AnVL/l" alt="زوجة أخرى" class="series-image">
                 </div>
                 <div class="series-info">
-                    <h3 class="series-title">المدينة البعيدة</h3>
+                    <h3 class="series-title">زوجة أخرى</h3>
                     <div class="series-meta">
                         <span>2022</span>
                         <div class="series-rating">
@@ -1127,9 +1065,9 @@
                         <i class="fas fa-eye"></i>
                         <span>12.8M مشاهدة</span>
                     </div>
-                    <p class="series-description">رحلة مثيرة إلى مدينة غامضة حيث تختلط الأقدار وتتغير حياة مجموعة من الأشخاص إلى الأبد.</p>
+                    <p class="series-description"> تحكي قصة جيلان، فتاة شابة في شرق تركيا، تُتهم زوراً بالقتل وتُجبر على تولي دور "الكُمة" - الزوجة الثانية - لكاران، شقيق المتوفى والرجل الذي تحبه. تجد نفسها متورطة في وضع عائلي معقد، تسعى لإثبات براءتها بينما تواجه تحديات وضعها الجديد </p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/distant-city'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/zawjaokhera">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1139,15 +1077,15 @@
                 </div>
             </div>
             
-            <!-- مسلسل أبناء الشمس -->
+            <!-- مسلسل السعادة العائلية -->
             <div class="series-card fade-in delay-3">
                 <div class="series-image-container">
-                    <img src="https://i.suar.me/QkXQ0/l" alt="أبناء الشمس" class="series-image">
+                    <img src="https://i.suar.me/rpYOy/l" alt="السعادة العائلية" class="series-image">
                 </div>
                 <div class="series-info">
-                    <h3 class="series-title">أبناء الشمس</h3>
+                    <h3 class="series-title">السعادة العائلية</h3>
                     <div class="series-meta">
-                        <span>2021</span>
+                        <span>2025</span>
                         <div class="series-rating">
                             <i class="fas fa-star"></i>
                             <span>9.0</span>
@@ -1157,9 +1095,9 @@
                         <i class="fas fa-eye"></i>
                         <span>10.3M مشاهدة</span>
                     </div>
-                    <p class="series-description">ملحمة تاريخية تروي قصة صراع بين قبيلتين في الأناضول القديمة، مليئة بالبطولات والخيانات والمصير المحتوم.</p>
+                    <p class="series-description"> ثلاث عائلات مختلفة لا تدرك صلة قرابتها تتجمع في قصر عتيق عمره مئات السنين. يحمل كل فرد أعباء ماضيه ومشاعره الناقصة، ليتعلموا جميعاً معنى الشفاء والعيش كعائلة واحدة تحت سقف واحد </p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/sons-of-sun'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/sa3ada1">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1196,9 +1134,9 @@
                         <i class="fas fa-eye"></i>
                         <span>15.2M مشاهدة</span>
                     </div>
-                    <p class="series-description">قصة مثيرة عن هوية مزدوجة وحب محفوف بالمخاطر عندما تكتشف امرأة أنها ليست الشخص الذي اعتقدت أنها تكونه.</p>
+                    <p class="series-description"> ليلى غيديز ، المدعية العائدة حديثاً إلى إسطنبول، تتولى قضية جريمة هزت تركيا. تتعاون مع كينان أوزتورك، مقدم الأخبار الشهير ، وسرعان ما ينشأ بينهما جاذبية، لكنهما يجهلان مدى قرب القاتل </p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://jamladz.github.io/App/chakhes1'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/chakhes1">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1228,7 +1166,7 @@
                     </div>
                     <p class="series-description">قصة حب مؤثرة تتحدى الزمن عندما يفقد رجل ذاكرته ويحاول حبيبته مساعدته على تذكر حبهما.</p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/remember-love'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/remember-love">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1258,7 +1196,7 @@
                     </div>
                     <p class="series-description">قصة حب محرم بين شاب وفتاة من عائلتين متنافستين في بلدة صغيرة، مليئة بالعواطف الجياشة والتحديات.</p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/love-walls'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/love-walls">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1297,7 +1235,7 @@
                     </div>
                     <p class="series-description">تشويق وإثارة عندما يكتشف محقق وجود قاتل متسلسل يقلده في جرائمه، في سباق ضد الزمن لوقف المزيد من الضحايا.</p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/the-shadow'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/the-shadow">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1327,7 +1265,7 @@
                     </div>
                     <p class="series-description">دراما عائلية مؤثرة تروي قصة عائلة تواجه تحديات كبيرة خلال فصل الشتاء القاسي في قرية نائية.</p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/winter-heart'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/winter-heart">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1357,7 +1295,7 @@
                     </div>
                     <p class="series-description">إعادة سردية معاصرة للحكايات الخالدة من ألف ليلة وليلة، مليئة بالسحر والمغامرة والرومانسية.</p>
                     <div class="series-actions">
-                        <button class="watch-btn" onclick="window.location.href='https://example.com/series/1001-nights'">
+                        <button class="watch-btn" data-series-link="https://jamladz.github.io/App/1001-nights">
                             <i class="fas fa-play"></i> شاهد
                         </button>
                         <button class="fav-btn">
@@ -1387,9 +1325,9 @@
                 <ul>
                     <li><a href="https://jamladz.github.io/App/">الصفحة الرئيسية</a></li>
                     <li><a href="https://jamladz.github.io/App/akterrawaj">المسلسلات</a></li>
-                    <li><a href="categories.html">التصنيفات</a></li>
-                    <li><a href="favorites.html">المفضلة</a></li>
-                    <li><a href="trending.html">الأكثر مشاهدة</a></li>
+                    <li><a href="#">التصنيفات</a></li>
+                    <li><a href="#">المفضلة</a></li>
+                    <li><a href="#">الأكثر مشاهدة</a></li>
                 </ul>
             </div>
             
@@ -1408,16 +1346,6 @@
             <p>© 2025 Shasha TV. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
-    
-    <!-- Video Player Modal -->
-    <div class="video-modal" id="video-modal">
-        <div class="video-modal-content">
-            <span class="close-video-modal" id="close-video-modal">×</span>
-            <div class="video-container">
-                <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
     
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -1445,30 +1373,30 @@
             },
             { 
                 id: "distant-city", 
-                title: "المدينة البعيدة", 
-                image: "https://i.suar.me/gPwQK/l", 
+                title: "غرفة لشخصين", 
+                image: "https://i.suar.me/avNeO/l", 
                 year: "2022", 
                 rating: "9.1",
                 views: "12.8M",
-                link: "https://example.com/series/distant-city"
+                link: "https://jamladz.github.io/App/ghorfali"
             },
             { 
                 id: "remember-love", 
-                title: "تذكر الحب", 
-                image: "https://i.suar.me/9lQG0/l", 
+                title: "زوجة أخرى", 
+                image: "https://i.suar.me/3AnVL/l", 
                 year: "2023", 
                 rating: "8.8",
                 views: "11.5M",
-                link: "https://example.com/series/remember-love"
+                link: "https://jamladz.github.io/App/zawjaokhera"
             },
             { 
                 id: "1001-nights", 
-                title: "ألف ليلة وليلة", 
-                image: "https://i.suar.me/MzB40/l", 
+                title: "السعادة العائلية", 
+                image: "https://i.suar.me/rpYOy/l", 
                 year: "2021", 
                 rating: "8.3",
                 views: "10.7M",
-                link: "https://example.com/series/1001-nights"
+                link: "https://jamladz.github.io/App/sa3ada1"
             },
             { 
                 id: "winter-heart", 
@@ -1477,7 +1405,7 @@
                 year: "2023", 
                 rating: "8.6",
                 views: "9.8M",
-                link: "https://example.com/series/winter-heart"
+                link: "https://jamladz.github.io/App/winter1"
             },
             { 
                 id: "love-walls", 
@@ -1486,7 +1414,7 @@
                 year: "2022", 
                 rating: "8.9",
                 views: "9.2M",
-                link: "https://example.com/series/love-walls"
+                link: "https://jamladz.github.io/App/lovewalls1"
             },
             { 
                 id: "the-shadow", 
@@ -1495,7 +1423,7 @@
                 year: "2023", 
                 rating: "8.7",
                 views: "8.5M",
-                link: "https://example.com/series/the-shadow"
+                link: "https://jamladz.github.io/App/shadow1"
             },
             { 
                 id: "sons-of-sun", 
@@ -1504,7 +1432,7 @@
                 year: "2021", 
                 rating: "9.0",
                 views: "8.1M",
-                link: "https://example.com/series/sons-of-sun"
+                link: "https://jamladz.github.io/App/sons1"
             },
             { 
                 id: "black-love", 
@@ -1513,7 +1441,7 @@
                 year: "2023", 
                 rating: "9.3",
                 views: "14.7M",
-                link: "https://example.com/series/black-love"
+                link: "https://jamladz.github.io/App/blacklove1"
             }
         ];
         
@@ -1537,9 +1465,6 @@
             // تفعيل النافذة المنبثقة للملف الشخصي
             setupProfilePopup();
             
-            // تفعيل مشغل الفيديو
-            setupVideoPlayer();
-            
             // تفعيل نظام البحث
             setupSearch();
             
@@ -1557,18 +1482,17 @@
         function setupWatchButtons() {
             document.querySelectorAll('.watch-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const seriesId = this.getAttribute('data-series');
-                    const series = sampleSeries.find(s => s.id === seriesId);
+                    e.preventDefault();
+                    const link = this.getAttribute('data-series-link');
                     
-                    if (series) {
+                    if (link) {
                         // إضافة تأثير التحميل
                         const originalContent = this.innerHTML;
                         this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
                         
                         // الانتقال إلى الرابط بعد تأخير بسيط
                         setTimeout(() => {
-                            window.location.href = series.link;
+                            window.location.href = link;
                         }, 500);
                         
                         // استعادة المحتوى الأصلي في حالة عدم الانتقال
@@ -1680,7 +1604,7 @@
                         </div>
                     `;
                     seriesItem.addEventListener('click', () => {
-                        window.location.href = `series.html?id=${series.id}`;
+                        window.location.href = series.link;
                     });
                     savedSeriesContainer.appendChild(seriesItem);
                 }
@@ -1718,38 +1642,6 @@
             // منع إغلاق النافذة عند النقر عليها
             popup.addEventListener('click', function(e) {
                 e.stopPropagation();
-            });
-        }
-        
-        // إعداد مشغل الفيديو
-        function setupVideoPlayer() {
-            const watchButtons = document.querySelectorAll('.watch-btn');
-            const videoModal = document.getElementById('video-modal');
-            const closeVideoModal = document.getElementById('close-video-modal');
-            const videoFrame = document.getElementById('video-frame');
-            
-            watchButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const seriesId = this.getAttribute('data-series');
-                    // يمكنك تغيير رابط الفيديو هنا بناءً على المسلسل
-                    videoFrame.src = `https://www.youtube.com/embed/EXAMPLE_VIDEO_ID?autoplay=1&series=${seriesId}`;
-                    videoModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-            
-            closeVideoModal.addEventListener('click', function() {
-                videoModal.classList.remove('active');
-                videoFrame.src = "";
-                document.body.style.overflow = 'auto';
-            });
-            
-            videoModal.addEventListener('click', function(e) {
-                if (e.target === videoModal) {
-                    videoModal.classList.remove('active');
-                    videoFrame.src = "";
-                    document.body.style.overflow = 'auto';
-                }
             });
         }
         
@@ -1822,7 +1714,7 @@
                         </div>
                     `;
                     item.addEventListener('click', () => {
-                        window.location.href = `series.html?id=${series.id}`;
+                        window.location.href = series.link;
                     });
                     searchResults.appendChild(item);
                 });
