@@ -6,6 +6,8 @@
     <title>Shasha TV - مسلسلات تركية HD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- إضافة SDK إعلانات Adsgram -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     <style>
         :root {
             --primary: #FF2E63;
@@ -642,6 +644,11 @@
             box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
         }
         
+        .watch-btn.loading {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
         .fav-btn {
             width: 35px;
             height: 35px;
@@ -1190,61 +1197,58 @@
         </div>
         
         <div class="series-grid">
-            <!-- يمكن إضافة المزيد من المسلسلات هنا بنفس الهيكل -->
-    <!-- مسلسل 1 -->
-    <div class="series-card fade-in delay-1">
-        <div class="series-image-container">
-            <img src="https://i.suar.me/XXXXX/l" alt="اسم المسلسل" class="series-image">
-            <div class="series-badge">قريبا</div>
-        </div>
-        <div class="series-info">
-            <h3 class="series-title">قريبا</h3>
-            <div class="series-meta">
-                <span>2025</span>
-                <div class="series-rating">
-                    <i class="fas fa-star"></i>
-                    <span>9.0</span>
+            <!-- مسلسل 1 -->
+            <div class="series-card fade-in delay-1">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/XXXXX/l" alt="اسم المسلسل" class="series-image">
+                    <div class="series-badge">قريبا</div>
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">قريبا</h3>
+                    <div class="series-meta">
+                        <span>2025</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.0</span>
+                        </div>
+                    </div>
+                    <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" data-series="new1" data-link="https://jamladz.github.io/App/soon">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
-            <div class="series-actions">
-                <button class="watch-btn" onclick="window.location.href='https://jamladz.github.io/App/soon'">
-                    <i class="fas fa-play"></i> شاهد
-                </button>
-                <button class="fav-btn">
-                    <i class="far fa-bookmark"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- مسلسل 2 -->
-    <div class="series-card fade-in delay-2">
-        <div class="series-image-container">
-            <img src="https://i.suar.me/YYYYY/l" alt="قريبا" class="series-image">
-        </div>
-        <div class="series-info">
-            <h3 class="series-title">قريبا</h3>
-            <div class="series-meta">
-                <span>2024</span>
-                <div class="series-rating">
-                    <i class="fas fa-star"></i>
-                    <span>8.7</span>
+            
+            <!-- مسلسل 2 -->
+            <div class="series-card fade-in delay-2">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/YYYYY/l" alt="قريبا" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">قريبا</h3>
+                    <div class="series-meta">
+                        <span>2024</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7</span>
+                        </div>
+                    </div>
+                    <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" data-series="new2" data-link="https://jamladz.github.io/App/soon">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
-            <div class="series-actions">
-                <button class="watch-btn" onclick="window.location.href='https://jamladz.github.io/App/soon'">
-                    <i class="fas fa-play"></i> شاهد
-                </button>
-                <button class="fav-btn">
-                    <i class="far fa-bookmark"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- يمكنك إضافة المزيد من المسلسلات بنفس الطريقة -->
         </div>
         
         <!-- Recommended For You -->
@@ -1254,60 +1258,58 @@
         </div>
         
         <div class="series-grid">
-            <!-- يمكن إضافة المزيد من المسلسلات هنا بنفس الهيكل -->
-    <!-- فيلم 1 -->
-    <div class="series-card fade-in delay-1">
-        <div class="series-image-container">
-            <img src="https://i.suar.me/pp9M6/l" alt="بين أيد أمينة 2" class="series-image">
-            <div class="series-badge">جديد</div>
-        </div>
-        <div class="series-info">
-            <h3 class="series-title">بين أيد أمينة</h3>
-            <div class="series-meta">
-                <span>2025</span>
-                <div class="series-rating">
-                    <i class="fas fa-star"></i>
-                    <span>9.0</span>
+            <!-- فيلم 1 -->
+            <div class="series-card fade-in delay-1">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/pp9M6/l" alt="بين أيد أمينة 2" class="series-image">
+                    <div class="series-badge">جديد</div>
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">بين أيد أمينة</h3>
+                    <div class="series-meta">
+                        <span>2025</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.0</span>
+                        </div>
+                    </div>
+                    <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" data-series="movie1" data-link="https://geo.dailymotion.com/player.html?video=x94hbvk">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
-            <div class="series-actions">
-                <button class="watch-btn" onclick="window.location.href='https://geo.dailymotion.com/player.html?video=x94hbvk'">
-                    <i class="fas fa-play"></i> شاهد
-                </button>
-                <button class="fav-btn">
-                    <i class="far fa-bookmark"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- مسلسل 2 -->
-    <div class="series-card fade-in delay-2">
-        <div class="series-image-container">
-            <img src="https://i.suar.me/Xvo9E/l" alt="Simarik" class="series-image">
-        </div>
-        <div class="series-info">
-            <h3 class="series-title">فيلم Simarik</h3>
-            <div class="series-meta">
-                <span>2024</span>
-                <div class="series-rating">
-                    <i class="fas fa-star"></i>
-                    <span>8.7</span>
+            
+            <!-- فيلم 2 -->
+            <div class="series-card fade-in delay-2">
+                <div class="series-image-container">
+                    <img src="https://i.suar.me/Xvo9E/l" alt="Simarik" class="series-image">
+                </div>
+                <div class="series-info">
+                    <h3 class="series-title">فيلم Simarik</h3>
+                    <div class="series-meta">
+                        <span>2024</span>
+                        <div class="series-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7</span>
+                        </div>
+                    </div>
+                    <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
+                    <div class="series-actions">
+                        <button class="watch-btn" data-series="movie2" data-link="رابط صفحة المسلسل">
+                            <i class="fas fa-play"></i> شاهد
+                        </button>
+                        <button class="fav-btn">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <p class="series-description">وصف قصير للمسلسل يظهر هنا...</p>
-            <div class="series-actions">
-                <button class="watch-btn" onclick="window.location.href='رابط صفحة المسلسل'">
-                    <i class="fas fa-play"></i> شاهد
-                </button>
-                <button class="fav-btn">
-                    <i class="far fa-bookmark"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    <!-- يمكنك إضافة المزيد من المسلسلات بنفس الطريقة -->
         </div>
     </main>
     
@@ -1442,9 +1444,10 @@
             setupWatchButtons();
         });
         
-        // تفعيل أزرار المشاهدة
+        // تفعيل أزرار المشاهدة مع نظام الإعلانات
         function setupWatchButtons() {
-            document.querySelectorAll('.watch-btn').forEach(button => {
+            // أزرار المشاهدة في قسم "الأكثر مشاهدة" (بدون إعلانات)
+            document.querySelectorAll('.section-title h3:contains("الأكثر مشاهدة") + .series-grid .watch-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const link = this.getAttribute('data-series-link') || this.onclick.toString().match(/window\.location\.href='(.*?)'/)?.[1];
@@ -1462,6 +1465,38 @@
                         setTimeout(() => {
                             this.innerHTML = originalContent;
                         }, 2000);
+                    }
+                });
+            });
+            
+            // أزرار المشاهدة في قسم "أحدث الإصدارات" و"أفلام" (مع إعلانات)
+            document.querySelectorAll('.section-title h3:contains("أحدث الإصدارات") + .series-grid .watch-btn, .section-title h3:contains("أفلام") + .series-grid .watch-btn').forEach(button => {
+                button.addEventListener('click', async function(e) {
+                    e.stopPropagation();
+                    const link = this.getAttribute('data-link');
+                    const button = this;
+                    
+                    if (!link) return;
+                    
+                    // تغيير حالة الزر إلى التحميل
+                    const originalContent = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+                    button.classList.add('loading');
+                    
+                    try {
+                        // عرض الإعلان من Adsgram
+                        await window.Adsgram.init({ blockId: "int-12037" }).show();
+                        
+                        // بعد انتهاء الإعلان، الانتقال إلى الرابط
+                        window.location.href = link;
+                        
+                    } catch (error) {
+                        console.error('Error showing ad:', error);
+                        alert('❌ حدث خطأ أثناء عرض الإعلان. يرجى المحاولة مرة أخرى.');
+                        
+                        // إعادة حالة الزر إلى الطبيعي في حالة الخطأ
+                        button.innerHTML = originalContent;
+                        button.classList.remove('loading');
                     }
                 });
             });
