@@ -816,6 +816,58 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- الحلقة 3 -->
+            <div class="episode-card">
+                <div class="episode-image-container">
+                    <img src="https://i.suar.me/3AnVL/l" alt="الحلقة 3" class="episode-image">
+                    <div class="episode-number">الحلقة 3</div>
+                </div>
+                <div class="episode-info">
+                    <h3 class="episode-title">الحلقة الثالثة</h3>
+                    <div class="episode-meta">
+                        <span>125 دقيقة</span>
+                        <div class="episode-views">
+                            <i class="fas fa-eye"></i>
+                            <span>1.7M مشاهدة</span>
+                        </div>
+                    </div>
+                    <p class="episode-description">
+                        💥 أحداث غير متوقعة وتطورات صادمة!
+صراع داخلي ومشاعر متضاربة تهدد استقرار العائلة.
+أسرار جديدة تنكشف وتغير مجرى الأحداث بشكل كبير.
+                    </p>
+                    <button class="watch-episode-btn" data-episode="3">
+                        <i class="fas fa-play"></i> شاهد الحلقة
+                    </button>
+                </div>
+            </div>
+            
+            <!-- الحلقة 4 -->
+            <div class="episode-card">
+                <div class="episode-image-container">
+                    <img src="https://i.suar.me/3AnVL/l" alt="الحلقة 4" class="episode-image">
+                    <div class="episode-number">الحلقة 4</div>
+                </div>
+                <div class="episode-info">
+                    <h3 class="episode-title">الحلقة الرابعة</h3>
+                    <div class="episode-meta">
+                        <span>130 دقيقة</span>
+                        <div class="episode-views">
+                            <i class="fas fa-eye"></i>
+                            <span>1.5M مشاهدة</span>
+                        </div>
+                    </div>
+                    <p class="episode-description">
+                        💣 صدامات عاطفية ومواجهات درامية!
+قرارات مصيرية تهدد مستقبل جيلان وتضعها في مأزق كبير.
+تفاصيل جديدة تظهر وتغير كل الموازين في القصة.
+                    </p>
+                    <button class="watch-episode-btn" data-episode="4">
+                        <i class="fas fa-play"></i> شاهد الحلقة
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
     
@@ -910,7 +962,9 @@
             // روابط الحلقات
             const episodeLinks = {
                 '1': 'https://geo.dailymotion.com/player.html?video=x9lo9cg',
-                '2': 'https://geo.dailymotion.com/player.html?video=x9lpkjw'
+                '2': 'https://geo.dailymotion.com/player.html?video=x9lpkjw',
+                '3': 'https://geo.dailymotion.com/player.html?video=x9luuqk',
+                '4': 'https://geo.dailymotion.com/player.html?video=x9lwc8m'
             };
             
             videoFrame.src = episodeLinks[episodeNumber];
@@ -936,6 +990,47 @@
             } else {
                 header.style.background = 'rgba(15, 14, 23, 0.95)';
             }
+        });
+
+        // إضافة مؤثرات إضافية للمسلسل
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة مؤثرات للبطاقات
+            const cards = document.querySelectorAll('.episode-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-8px) scale(1.02)';
+                    card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.4)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                    card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+                });
+            });
+            
+            // مؤثرات للزر العائم
+            const floatingBtn = document.querySelector('.floating-back-btn');
+            floatingBtn.addEventListener('mouseenter', () => {
+                floatingBtn.style.transform = 'scale(1.1) translateY(-7px)';
+            });
+            
+            floatingBtn.addEventListener('mouseleave', () => {
+                floatingBtn.style.transform = 'scale(1) translateY(0)';
+            });
+            
+            // مؤثرات للزر الرئيسي
+            const watchBtns = document.querySelectorAll('.watch-episode-btn');
+            watchBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    btn.style.transform = 'translateY(-5px) scale(1.05)';
+                    btn.style.boxShadow = '0 8px 20px rgba(255, 46, 99, 0.5)';
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translateY(0) scale(1)';
+                    btn.style.boxShadow = '0 5px 15px rgba(255, 46, 99, 0.4)';
+                });
+            });
         });
     </script>
 </body>
