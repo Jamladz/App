@@ -384,6 +384,33 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
+        .episode-card.new-episode {
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+        
+        .episode-card.new-episode::before {
+            content: 'جديد';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(255, 46, 99, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
         .episode-image-container {
             position: relative;
             width: 100%;
@@ -868,6 +895,32 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- الحلقة 5 (المضافة) -->
+            <div class="episode-card new-episode">
+                <div class="episode-image-container">
+                    <img src="https://i.suar.me/avNeO/l" alt="الحلقة 5" class="episode-image">
+                    <div class="episode-number">الحلقة 5</div>
+                </div>
+                <div class="episode-info">
+                    <h3 class="episode-title">الحلقة الخامسة</h3>
+                    <div class="episode-meta">
+                        <span>125 دقيقة</span>
+                        <div class="episode-views">
+                            <i class="fas fa-eye"></i>
+                            <span>1.2M مشاهدة</span>
+                        </div>
+                    </div>
+                    <p class="episode-description">
+                        🚀 الحلقة الأكثر تشويقاً حتى الآن! 
+أحداث غير متوقعة وتطورات درامية مذهلة 
+تغيرات كبرى في مسار الأحداث وعلاقات الشخصيات 
+                    </p>
+                    <button class="watch-episode-btn" data-episode="5">
+                        <i class="fas fa-play"></i> شاهد الحلقة
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
     
@@ -959,12 +1012,13 @@
             const videoScreen = document.getElementById('videoScreen');
             const videoFrame = document.getElementById('videoFrame');
             
-            // روابط الحلقات
+            // روابط الحلقات (تمت إضافة الحلقة الخامسة)
             const episodeLinks = {
                 '1': 'https://geo.dailymotion.com/player.html?video=x9jztc4',
                 '2': 'https://geo.dailymotion.com/player.html?video=x9kgyvg',
                 '3': 'https://geo.dailymotion.com/player.html?video=x9la1kk',
-                '4': 'https://geo.dailymotion.com/player.html?video=x9lmxz4'
+                '4': 'https://geo.dailymotion.com/player.html?video=x9lmxz4',
+                '5': 'https://geo.dailymotion.com/player.html?video=x9lvedc'
             };
             
             videoFrame.src = episodeLinks[episodeNumber];
