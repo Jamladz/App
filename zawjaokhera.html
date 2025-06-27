@@ -8,6 +8,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     <style>
+        /* أضفت هذا الجزء للأزرار الثابتة في الأسفل */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: var(--light-dark);
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        
+        .nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            font-size: 12px;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .nav-button:hover {
+            color: var(--primary);
+        }
+        
+        .nav-button i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        body {
+            padding-bottom: 70px; /* مساحة للأزرار الثابتة */
+        }
+        
+        /* بقية الأنماط كما هي مع تعديلات طفيفة */
         :root {
             --primary: #FF2E63;
             --secondary: #08D9D6;
@@ -132,44 +172,6 @@
             transform: translateY(-50%);
             color: var(--light);
             opacity: 0.7;
-        }
-        
-        /* زر الرجوع العائم الكبير */
-        .floating-back-btn {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            background: var(--gradient);
-            color: var(--dark);
-            border: none;
-            padding: 18px 30px;
-            border-radius: 35px;
-            font-weight: 700;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 999;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            animation: float 3s ease-in-out infinite;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .floating-back-btn:hover {
-            transform: scale(1.08) translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .floating-back-btn i {
-            font-size: 22px;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0px); }
         }
         
         /* Hero Section - Series Page */
@@ -471,7 +473,6 @@
         
         .watch-episode-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
         }
         
         .watch-episode-btn.loading {
@@ -632,10 +633,16 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
-            .floating-back-btn {
-                bottom: 30px;
-                left: 30px;
-                padding: 15px 25px;
+            .bottom-nav {
+                padding: 8px 0;
+            }
+            
+            .nav-button {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            
+            .nav-button i {
                 font-size: 18px;
             }
         }
@@ -679,13 +686,6 @@
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
-            }
-            
-            .floating-back-btn {
-                bottom: 20px;
-                left: 20px;
-                padding: 12px 20px;
-                font-size: 16px;
             }
         }
     </style>
@@ -869,12 +869,23 @@
         </div>
     </main>
     
-    <!-- زر الرجوع العائم الكبير -->
-    <a href="https://jamladz.github.io/App/akterrawaj" class="floating-back-btn">
-        <i class="fas fa-arrow-right"></i> العودة للمسلسلات
-    </a>
+    <!-- أزرار ثابتة في الأسفل بدون أي تمييز نشط -->
+    <div class="bottom-nav">
+        <a href="https://jamladz.github.io/App/" class="nav-button">
+            <i class="fas fa-home"></i>
+            <span>الصفحة الرئيسية</span>
+        </a>
+        <a href="https://jamladz.github.io/App/akterrawaj" class="nav-button">
+            <i class="fas fa-film"></i>
+            <span>كل المسلسلات</span>
+        </a>
+        <a href="#" class="nav-button">
+            <i class="fas fa-play-circle"></i>
+            <span>كل الحلقات</span>
+        </a>
+    </div>
     
-    <!-- Footer -->
+    <!-- Footer أبسط كما في المثال -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-col">
@@ -885,27 +896,6 @@
                         <i class="fab fa-telegram"></i>
                     </a>
                 </div>
-            </div>
-            
-            <div class="footer-col">
-                <h4>روابط سريعة</h4>
-                <ul>
-                    <li><a href="index.html">الصفحة الرئيسية</a></li>
-                    <li><a href="series.html">المسلسلات</a></li>
-                    <li><a href="categories.html">التصنيفات</a></li>
-                    <li><a href="favorites.html">المفضلة</a></li>
-                    <li><a href="trending.html">الأكثر مشاهدة</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h4>الفئات</h4>
-                <ul>
-                    <li><a href="category.html?type=romance">رومانسي</a></li>
-                    <li><a href="category.html?type=drama">دراما</a></li>
-                    <li><a href="category.html?type=thriller">تشويق</a></li>
-                    <li><a href="category.html?type=historical">تاريخي</a></li>
-                </ul>
             </div>
         </div>
         
@@ -988,47 +978,6 @@
             } else {
                 header.style.background = 'rgba(15, 14, 23, 0.95)';
             }
-        });
-
-        // إضافة مؤثرات إضافية للمسلسل
-        document.addEventListener('DOMContentLoaded', function() {
-            // إضافة مؤثرات للبطاقات
-            const cards = document.querySelectorAll('.episode-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-8px) scale(1.02)';
-                    card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.4)';
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0) scale(1)';
-                    card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                });
-            });
-            
-            // مؤثرات للزر العائم
-            const floatingBtn = document.querySelector('.floating-back-btn');
-            floatingBtn.addEventListener('mouseenter', () => {
-                floatingBtn.style.transform = 'scale(1.1) translateY(-7px)';
-            });
-            
-            floatingBtn.addEventListener('mouseleave', () => {
-                floatingBtn.style.transform = 'scale(1) translateY(0)';
-            });
-            
-            // مؤثرات للزر الرئيسي
-            const watchBtns = document.querySelectorAll('.watch-episode-btn');
-            watchBtns.forEach(btn => {
-                btn.addEventListener('mouseenter', () => {
-                    btn.style.transform = 'translateY(-5px) scale(1.05)';
-                    btn.style.boxShadow = '0 8px 20px rgba(255, 46, 99, 0.5)';
-                });
-                
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.transform = 'translateY(0) scale(1)';
-                    btn.style.boxShadow = '0 5px 15px rgba(255, 46, 99, 0.4)';
-                });
-            });
         });
     </script>
 </body>
