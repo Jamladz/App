@@ -6,6 +6,8 @@
     <title>Shasha TV - ليلى</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- تم إضافة سكريبت Adsgram هنا -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     <style>
         :root {
             --primary: #FF2E63;
@@ -891,11 +893,34 @@
     </div>
     
     <script>
-        // تفعيل أزرار مشاهدة الحلقات
+        // تفعيل أزرار مشاهدة الحلقات مع نظام الإعلانات
         document.querySelectorAll('.watch-episode-btn').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', async function() {
                 const episodeNumber = this.getAttribute('data-episode');
-                playEpisode(episodeNumber);
+                const button = this;
+                
+                // تغيير حالة الزر إلى التحميل
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+                button.classList.add('loading');
+                
+                try {
+                    // عرض الإعلان من Adsgram
+                    await window.Adsgram.init({ blockId: "int-12037" }).show();
+                    
+                    // بعد انتهاء الإعلان، تشغيل الحلقة
+                    playEpisode(episodeNumber);
+                    
+                    // إعادة حالة الزر إلى الطبيعي
+                    button.innerHTML = '<i class="fas fa-play"></i> شاهد الحلقة';
+                    button.classList.remove('loading');
+                } catch (error) {
+                    console.error('Error showing ad:', error);
+                    alert('❌ حدث خطأ أثناء عرض الإعلان. يرجى المحاولة مرة أخرى.');
+                    
+                    // إعادة حالة الزر إلى الطبيعي في حالة الخطأ
+                    button.innerHTML = '<i class="fas fa-play"></i> شاهد الحلقة';
+                    button.classList.remove('loading');
+                }
             });
         });
         
