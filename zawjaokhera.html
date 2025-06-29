@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shasha TV - زوجة أخرى - الحلقة الخامسة</title>
+    <title>Shasha TV - زوجة أخرى - الحلقة السادسة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
@@ -500,6 +500,19 @@
             font-size: 12px;
             z-index: 10;
             box-shadow: 0 4px 10px rgba(255, 46, 99, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 46, 99, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 46, 99, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 46, 99, 0);
+            }
         }
         
         /* Video Player Screen */
@@ -710,6 +723,24 @@
                 gap: 30px;
             }
         }
+        
+        /* New Episode Banner */
+        .new-episode-banner {
+            background: linear-gradient(90deg, #FF2E63, #08D9D6);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            animation: bannerPulse 3s infinite;
+        }
+        
+        @keyframes bannerPulse {
+            0% { box-shadow: 0 0 10px rgba(8, 217, 214, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 46, 99, 0.7); }
+            100% { box-shadow: 0 0 10px rgba(8, 217, 214, 0.5); }
+        }
     </style>
 </head>
 <body>
@@ -779,6 +810,11 @@
         <a href="https://jamladz.github.io/App/akterrawaj" class="back-btn">
             <i class="fas fa-arrow-right"></i> العودة إلى المسلسلات
         </a>
+        
+        <!-- New Episode Banner -->
+        <div class="new-episode-banner">
+            <i class="fas fa-bell"></i> الحلقة السادسة متوفرة الآن! شاهدها قبل الجميع
+        </div>
         
         <!-- Episodes Section -->
         <div class="section-title">
@@ -889,8 +925,8 @@
                 </div>
             </div>
             
-            <!-- الحلقة 5 - المضافة حديثاً -->
-            <div class="episode-card new-episode">
+            <!-- الحلقة 5 -->
+            <div class="episode-card">
                 <div class="episode-image-container">
                     <img src="https://i.suar.me/3AnVL/l" alt="الحلقة 5" class="episode-image">
                     <div class="episode-number">الحلقة 5</div>
@@ -914,10 +950,36 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- الحلقة 6 - المضافة حديثاً -->
+            <div class="episode-card new-episode">
+                <div class="episode-image-container">
+                    <img src="https://i.suar.me/3AnVL/l" alt="الحلقة 6" class="episode-image">
+                    <div class="episode-number">الحلقة 6</div>
+                </div>
+                <div class="episode-info">
+                    <h3 class="episode-title">الحلقة السادسة</h3>
+                    <div class="episode-meta">
+                        <span>140 دقيقة</span>
+                        <div class="episode-views">
+                            <i class="fas fa-eye"></i>
+                            <span>1.1M مشاهدة</span>
+                        </div>
+                    </div>
+                    <p class="episode-description">
+                        💥 حلقة جديدة مليئة بالأحداث المثيرة والمفاجآت!
+تتكشف الأحداث بشكل دراماتيكي وتظهر حقائق جديدة.
+مشاهد لا تُنسى وصراعات تصل إلى ذروتها.
+                    </p>
+                    <button class="watch-episode-btn" data-episode="6">
+                        <i class="fas fa-play"></i> شاهد الحلقة
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
     
-    <!-- أزرار ثابتة في الأسفل بدون أي تمييز نشط -->
+    <!-- أزرار ثابتة في الأسفل -->
     <div class="bottom-nav">
         <a href="https://jamladz.github.io/App/" class="nav-button">
             <i class="fas fa-home"></i>
@@ -1001,7 +1063,8 @@
                 '2': 'https://geo.dailymotion.com/player.html?video=x9lpkjw',
                 '3': 'https://geo.dailymotion.com/player.html?video=x9luqfw',
                 '4': 'https://geo.dailymotion.com/player.html?video=x9lwc8m',
-                '5': 'https://geo.dailymotion.com/player.html?video=x9lwjt0'
+                '5': 'https://geo.dailymotion.com/player.html?video=x9lwjt0',
+                '6': 'https://geo.dailymotion.com/player.html?video=x9m0gyw'
             };
             
             videoFrame.src = episodeLinks[episodeNumber];
@@ -1028,6 +1091,10 @@
                 header.style.background = 'rgba(15, 14, 23, 0.95)';
             }
         });
+        
+        // تمييز الحلقة الجديدة
+        const newEpisode = document.querySelector('.new-episode');
+        newEpisode.scrollIntoView({ behavior: 'smooth', block: 'center' });
     </script>
 </body>
 </html>
